@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <title>Охрана труда</title>
+</head>
+
+<body>
+<!--Навигация-->
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid" style="width: 65%">
+        <a class="navbar-brand p-0" href="/index.html">
+            <img src="/img/logo.jpg" width="42px" height="42px" style="border-radius: 10px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/index.html">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Подробный список</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Удостоверения</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Настройки
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/subdivisions-settings.html">Подразделения</a></li>
+                    <li><a class="dropdown-item" href="/employees-settings.html">Сотрудники</a></li>
+                    <li><a class="dropdown-item" href="/positions-settings.html">Должности</a></li>
+                    <li><a class="dropdown-item" href="/exams-settings.html">Виды экзаменов</a></li>
+                </ul>
+            </li>
+            </ul>
+            <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info p-2" type="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>    
+
+    <div class="container" style="width:65%">
+        <h3 class="text-center mt-3">Список подразделений</h3>    
+
+        <table class="table table-striped table-hover m-auto mt-3 border">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Наименование подраздения</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>ИВЦ</td>
+                <td>
+                    <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#subdivison-backdrop">
+                        Редактировать
+                      </a>
+                </td>
+                <td>
+                    <a href="#">Удалить</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>ИВЦ</td>
+                <td>
+                    <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#subdivison-backdrop">
+                        Редактировать
+                      </a>
+                </td>
+                <td>
+                    <a href="#">Удалить</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>ИВЦ</td>
+                <td>
+                    <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#subdivison-backdrop">
+                        Редактировать
+                      </a>
+                </td>
+                <td>
+                    <a href="#">Удалить</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    
+          <button class="btn btn-secondary mt-3 d-block m-auto">Добавить</button>
+    </div>
+    
+
+<!-- Модальное окно для добавления/редактирования подразделений -->
+      <div class="modal fade" id="subdivison-backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Редактирование</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Наименование</span>
+                <input type="text" class="form-control" placeholder="Введите наименование" aria-label="Наименование подразделения" aria-describedby="basic-addon1">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-primary">Принять</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <script src="/js/bootstrap_js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="/js/bootstrap_js/tooltip-enable" crossorigin="anonymous">
+    </script>
+</body>
+</html>

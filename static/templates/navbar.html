@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block navbar %}
+<!--Навигация-->
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid" style="width: 65%">
+          <a class="navbar-brand p-0" href="/">
+            <img src="{{ url_for('static', path='img/logo.jpg') }}" width="42px" height="42px" style="border-radius: 10px">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Подробный список</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Удостоверения</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Настройки
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/subdivisions">Подразделения</a></li>
+                  <li><a class="dropdown-item" href="employees-settings.html">Сотрудники</a></li>
+                  <li><a class="dropdown-item" href="positions-settings.html">Должности</a></li>
+                  <li><a class="dropdown-item" href="exams-settings.html">Виды экзаменов</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-info p-2" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+{% endblock %}
