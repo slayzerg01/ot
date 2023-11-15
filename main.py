@@ -5,12 +5,15 @@ from starlette.templating import Jinja2Templates
 
 from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from core.models.exam import Position
+
+from core.api import employee
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="static/templates")
+
+app.include_router(employee.router)
 
 @app.get("/")
 async def root(request: Request, session: AsyncSession = Depends(get_async_session)):

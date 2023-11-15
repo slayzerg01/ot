@@ -28,4 +28,5 @@ class Employee(BaseModel):
     subdivision_id: Mapped[int] = mapped_column(Integer, ForeignKey(Subdivision.id), nullable=False)
 
     position = relationship("Position", back_populates="employees")
-    subdivision = relationship("Subdivision", back_populates="subdivision")
+    subdivision = relationship("Subdivision", back_populates="employees")
+
