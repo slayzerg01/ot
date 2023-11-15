@@ -3,9 +3,9 @@ from sqlalchemy import insert
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
-from core.database import get_async_session
+from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from models import Position
+from core.models.exam import Position
 
 app = FastAPI()
 
