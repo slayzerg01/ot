@@ -6,7 +6,7 @@ from starlette.templating import Jinja2Templates
 from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.api import employee
+from core.api.routers import employee
 
 app = FastAPI()
 
@@ -26,8 +26,6 @@ async def root(request: Request, session: AsyncSession = Depends(get_async_sessi
     return templates.TemplateResponse("index.html",
                                       {"request": request})
 
-
-
 @app.get("/subdivisions")
 async def root(request: Request, session: AsyncSession = Depends(get_async_session)):
     # stmt = insert(Position).values(
@@ -38,7 +36,6 @@ async def root(request: Request, session: AsyncSession = Depends(get_async_sessi
     # await session.commit()
     return templates.TemplateResponse("subdivisions-settings.html",
                                       {"request": request})
-
 
 @app.get("/test")
 async def root():
