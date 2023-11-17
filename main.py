@@ -7,6 +7,7 @@ from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.api.routers import employee
+from core.api.routers import exam_types
 
 app = FastAPI()
 
@@ -14,6 +15,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="static/templates")
 
 app.include_router(employee.router)
+app.include_router(exam_types.router)
 
 @app.get("/")
 async def root(request: Request, session: AsyncSession = Depends(get_async_session)):

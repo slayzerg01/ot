@@ -12,7 +12,7 @@ router = APIRouter(
     tags=["employees"]
 )
 
-@router.get("/get_all", summary="get all employees")
+@router.get("/", summary="get all employees")
 async def read_employees(subdivision: str = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchema]: 
     """
     Get list of employees.
