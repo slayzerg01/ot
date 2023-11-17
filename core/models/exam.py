@@ -28,6 +28,8 @@ class Exam(BaseModel):
     date: Mapped[DATE] = mapped_column(DATE, nullable=False)
     next_date: Mapped[DATE] = mapped_column(DATE, nullable=False)
     protocol: Mapped[str] = mapped_column(String(255), nullable=False)
+    notation: Mapped[str] = mapped_column(String(500), nullable=True) 
+    place: Mapped[str] = mapped_column(String(50), nullable=True)
     employee_id: Mapped[int] = mapped_column(
         Integer, 
         ForeignKey(Employee.id), 
