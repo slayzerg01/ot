@@ -1,8 +1,9 @@
-from sqlalchemy import and_, select, or_, delete
+from fastapi import HTTPException
+from sqlalchemy import and_, select, or_, delete, update
 from sqlalchemy.orm import joinedload
 from core.models.employee import Employee
 from sqlalchemy.engine import Result
-from core.api.schemas.employee import EmployeeSchema
+from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -54,8 +55,20 @@ async def add_employee(session, name: str, subdivision: int, position: int):
     return employee
 
 
-async def del_employee(session: AsyncSession, id: int | None , name: int | None):
-    stmt = stmt = delete(Employee).where(or_(Employee.id == id, Employee.FIO == name))
+async def del_employee(employee: Employee, session: AsyncSession):
+    stmt = delete(Employee).where(Employee.id == employee.id)
     await session.execute(stmt)
     await session.commit()
     
+async def update_employee(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate):
+    # for name, value in employee_update.model_dump(exclude_unset=True).items():
+    #     setattr(employee, name, value)
+    try:
+        update_data = employee_update.model_dump(exclude_unset=True)
+        update_data['FIO'] = update_data.pop('fio')
+        stmt = update(Employee).where(Employee.id == employee.id).values(update_data)
+        await session.execute(stmt)
+        await session.commit()
+        return employee
+    except Exception as ex:
+        raise HTTPException(status_code=400, detail=str(ex))

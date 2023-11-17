@@ -1,10 +1,18 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
-class EmployeeSchema(BaseModel):
-    id: int
+class EmployeeBase(BaseModel):
     fio: str
-    position: str
     position_id: int
-    subdivision: str
     subdivision_id: int
+    model_config = ConfigDict(from_attributes=True)
+
+class EmployeeSchema(EmployeeBase):
+    id: int
+    position: str
+    subdivision: str
+
+class EmployeeUpdate(EmployeeBase):
+    fio: str | None = None
+    position_id: int | None = None
+    subdivision_id: int | None = None
