@@ -3,7 +3,7 @@ from sqlalchemy import and_, select, or_, delete, update
 from sqlalchemy.orm import joinedload
 from core.models.employee import Employee
 from sqlalchemy.engine import Result
-from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate
+from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, CreateEmployee
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -44,11 +44,12 @@ async def get_employee(session: AsyncSession, name: str | None, id: int | None) 
         return None
 
 
-async def add_employee(session, name: str, subdivision: int, position: int):
+async def add_employee(session: AsyncSession, new_employee: CreateEmployee):
     employee = Employee()
-    employee.FIO = name 
-    employee.subdivision_id = subdivision
-    employee.position_id =position
+    employee.FIO = new_employee.fio
+    employee.subdivision_id = new_employee.subdivision_id
+    employee.position_id = new_employee.position_id
+    employee.is_active = new_employee.is_active
     session.add(employee)
     await session.commit()
     await session.refresh(employee)
@@ -66,9 +67,13 @@ async def update_employee(session: AsyncSession, employee: Employee, employee_up
     try:
         update_data = employee_update.model_dump(exclude_unset=True)
         update_data['FIO'] = update_data.pop('fio')
+        id = employee.id
         stmt = update(Employee).where(Employee.id == employee.id).values(update_data)
         await session.execute(stmt)
         await session.commit()
+        stmt = select(Employee).where(Employee.id == id)
+        res: Result = await session.execute(stmt)
+        employee: Employee = res.scalar_one_or_none()
         return employee
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))

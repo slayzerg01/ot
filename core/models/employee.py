@@ -1,15 +1,25 @@
-from sqlalchemy import String, Integer, ForeignKey
+from sqlalchemy import String, Integer, ForeignKey, BOOLEAN
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import BaseModel
 
 
+
+class Division(BaseModel):
+    __tablename__ = 'divisions'
+
+    name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+
+    subdivision = relationship("Subdivision", back_populates="division", passive_deletes=True)
+
 class Subdivision(BaseModel):
     __tablename__ = 'subdivisions'
 
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    division_id : Mapped[int] = mapped_column(Integer, ForeignKey(Division.id, ondelete='CASCADE'), nullable=False)
 
     employees = relationship("Employee", back_populates="subdivision", passive_deletes=True)
+    division = relationship("Division", back_populates="subdivision", passive_deletes=True)
 
 
 class Position(BaseModel):
@@ -18,13 +28,14 @@ class Position(BaseModel):
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
 
     employees = relationship("Employee", back_populates="position", passive_deletes=True)
-    
+
 
 
 class Employee(BaseModel):
     __tablename__ = 'employees'
 
     FIO: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    is_active: Mapped[bool] = mapped_column(BOOLEAN, nullable=False)
     position_id: Mapped[int] = mapped_column(Integer, ForeignKey(Position.id, ondelete='CASCADE'), nullable=False)
     subdivision_id: Mapped[int] = mapped_column(Integer, ForeignKey(Subdivision.id, ondelete='CASCADE'), nullable=False)
 

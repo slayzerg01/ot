@@ -16,3 +16,8 @@ class EmployeeUpdate(EmployeeBase):
     fio: str | None = None
     position_id: int | None = None
     subdivision_id: int | None = None
+    is_active: bool
+
+class CreateEmployee(EmployeeBase):
+    is_active: bool
+    pass
