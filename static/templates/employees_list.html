@@ -13,19 +13,20 @@
       <div class="card-header d-flex justify-content-start align-items-center">
         <h5 class="text-center d-block" style="margin-right: auto">{{employee.fio}}</h5>
   
-        <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#addBackdrop{{employee.id}}">
           <img src="{{ url_for('static', path='img/icon-plus.svg') }}" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить экзамен">
         </a>
   
-        <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+        <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#editBackdrop{{employee.id}}">
           <img src="{{ url_for('static', path='img/icon-edit.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника">
         </a>
   
       </div>
           <div class="card-body row">
             <p class="card-text"><b>Должность:</b> {{employee.position}}</p>
-            <p class="card-text"><b>Подразделение:</b> {{employee.subdivision}}</p>
-            <p class="card-text"><b>Номер удостоверения:</b> {{ None }}</p>
+            <p class="card-text"><b>Подразделение:</b> {{employee.division}}</p>
+            <p class="card-text"><b>Группа, отдел:</b> {{employee.subdivision}}</p>
+            <p class="card-text"><b>Номер удостоверения:</b> {{ employee.certificate }}</p>
           </div>
           <!--<div class="container-sm"><a href="#" class="btn btn-primary">Редактировать</a></div>-->
     </div>
@@ -33,9 +34,10 @@
   
 </div>
 
+{% for employee in employees %}
 <!-- Модальные окна -->
 <!-- Модальное окно редактирования информации о сотруднике -->
-<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="editBackdrop{{employee.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -46,8 +48,7 @@
 
           <div class="input-group mb-3">
             <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Должность</label>
-            <select class="form-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
+            <select class="form-select">
               <option value="1">Инженер</option>
               <option value="2">Инженер 2 категории</option>
               <option value="3">Инженер 3 категории</option>
@@ -56,7 +57,7 @@
 
           <div class="input-group mb-3">
             <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Подразделение</label>
-            <select class="form-select" id="inputGroupSelect01">
+            <select class="form-select">
               <option selected>Choose...</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -80,7 +81,7 @@
     </div>
   </div>
 <!-- Модальное окно добавления экзамена -->
-  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="addBackdrop{{employee.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -117,4 +118,5 @@
       </div>
     </div>
 </div>
+{% endfor %}
 {% endblock employyes_list %}

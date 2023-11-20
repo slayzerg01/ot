@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.models.database import get_async_session
 from core.models.employee import Employee
 from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, EmployeeBase, CreateEmployee
-from core.api.tools.employee_tools import get_all_employees, get_employee, add_employee, del_employee, update_employee
+from core.api.tools.employee_tools import get_all_employees, get_employee, add_employee, del_employee, update_employee, get_all_employees_v2
 from core.api.tools.dependencies import employee_by_id
 from sqlalchemy.exc import IntegrityError
 

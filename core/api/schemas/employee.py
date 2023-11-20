@@ -11,6 +11,14 @@ class EmployeeSchema(EmployeeBase):
     id: int
     position: str
     subdivision: str
+   
+
+class EmployeeSchema_v2(EmployeeBase):
+    id: int
+    position: str
+    subdivision: str
+    division: str
+    certificate: int
 
 class EmployeeUpdate(EmployeeBase):
     fio: str | None = None

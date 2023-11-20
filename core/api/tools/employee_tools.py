@@ -1,9 +1,10 @@
 from fastapi import HTTPException
 from sqlalchemy import and_, select, or_, delete, update
 from sqlalchemy.orm import joinedload
-from core.models.employee import Employee
+from core.models.employee import Employee, Division
+from core.models.exam import Certificate
 from sqlalchemy.engine import Result
-from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, CreateEmployee
+from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, CreateEmployee, EmployeeSchema_v2
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -22,6 +23,34 @@ async def get_all_employees(session: AsyncSession, skip: int, limit: int, subdiv
                 position_id=employee.position.id,
                 subdivision=employee.subdivision.name,
                 subdivision_id=employee.subdivision.id
+            )
+            result.append(res)
+    return result
+
+async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema_v2]:
+    stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
+    res: Result = await session.execute(stmt)
+    employees: list[Employee] = res.scalars().all()
+    result = []
+    for item in employees:
+        employee : Employee = item
+        stmt = select(Division).where(Division.id == employee.subdivision.division_id)
+        res: Result = await session.execute(stmt)
+        div: Division = res.scalar_one_or_none()
+        stmt = select(Certificate).where(Certificate.employee_id == employee.id)
+        res: Result = await session.execute(stmt)
+        cer: Certificate = res.scalar_one_or_none()
+        if employee.subdivision.name == subdivision or subdivision == None:
+            res: EmployeeSchema_v2 = EmployeeSchema_v2(
+                fio=employee.FIO,
+                id=employee.id,
+                position=employee.position.name,
+                position_id=employee.position.id,
+                subdivision=employee.subdivision.name,
+                subdivision_id=employee.subdivision.id,
+                division = div.name,
+                division_id = div.id, 
+                certificate = cer.number
             )
             result.append(res)
     return result
