@@ -1,0 +1,1238 @@
+[2023-11-18 21:05:04 +0500] [4446] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fb8eda184a0>
+  on_reload: <function OnReload.on_reload at 0x7fb8eda185e0>
+  when_ready: <function WhenReady.when_ready at 0x7fb8eda18720>
+  pre_fork: <function Prefork.pre_fork at 0x7fb8eda18860>
+  post_fork: <function Postfork.post_fork at 0x7fb8eda189a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fb8eda18ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7fb8eda18c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fb8eda18d60>
+  pre_exec: <function PreExec.pre_exec at 0x7fb8eda18ea0>
+  pre_request: <function PreRequest.pre_request at 0x7fb8eda18fe0>
+  post_request: <function PostRequest.post_request at 0x7fb8eda19080>
+  child_exit: <function ChildExit.child_exit at 0x7fb8eda191c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fb8eda19300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fb8eda19440>
+  on_exit: <function OnExit.on_exit at 0x7fb8eda19580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7fb8eda19760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 21:05:04 +0500] [4446] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 21:05:04 +0500] [4446] [DEBUG] Arbiter booted
+[2023-11-18 21:05:04 +0500] [4446] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (4446)
+[2023-11-18 21:05:04 +0500] [4446] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 21:05:04 +0500] [4454] [INFO] Booting worker with pid: 4454
+[2023-11-18 21:05:04 +0500] [4455] [INFO] Booting worker with pid: 4455
+[2023-11-18 21:05:04 +0500] [4456] [INFO] Booting worker with pid: 4456
+[2023-11-18 21:05:04 +0500] [4457] [INFO] Booting worker with pid: 4457
+[2023-11-18 21:05:04 +0500] [4458] [INFO] Booting worker with pid: 4458
+[2023-11-18 21:05:05 +0500] [4459] [INFO] Booting worker with pid: 4459
+[2023-11-18 21:05:05 +0500] [4460] [INFO] Booting worker with pid: 4460
+[2023-11-18 21:05:05 +0500] [4461] [INFO] Booting worker with pid: 4461
+[2023-11-18 21:05:05 +0500] [4462] [INFO] Booting worker with pid: 4462
+[2023-11-18 21:05:05 +0500] [4446] [DEBUG] 9 workers
+[2023-11-18 21:05:07 +0500] [4455] [INFO] Started server process [4455]
+[2023-11-18 21:05:07 +0500] [4455] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4455] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4454] [INFO] Started server process [4454]
+[2023-11-18 21:05:07 +0500] [4454] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4454] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4456] [INFO] Started server process [4456]
+[2023-11-18 21:05:07 +0500] [4456] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4456] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4457] [INFO] Started server process [4457]
+[2023-11-18 21:05:07 +0500] [4457] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4457] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4459] [INFO] Started server process [4459]
+[2023-11-18 21:05:07 +0500] [4459] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4459] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4458] [INFO] Started server process [4458]
+[2023-11-18 21:05:07 +0500] [4458] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4458] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4461] [INFO] Started server process [4461]
+[2023-11-18 21:05:07 +0500] [4461] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4461] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4460] [INFO] Started server process [4460]
+[2023-11-18 21:05:07 +0500] [4460] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4460] [INFO] Application startup complete.
+[2023-11-18 21:05:07 +0500] [4462] [INFO] Started server process [4462]
+[2023-11-18 21:05:07 +0500] [4462] [INFO] Waiting for application startup.
+[2023-11-18 21:05:07 +0500] [4462] [INFO] Application startup complete.
+[2023-11-18 22:23:28 +0500] [4446] [INFO] Handling signal: term
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Shutting down
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Waiting for application shutdown.
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Finished server process [4461]
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Finished server process [4454]
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Finished server process [4462]
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Application shutdown complete.
+[2023-11-18 22:23:28 +0500] [4461] [INFO] Worker exiting (pid: 4461)
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Finished server process [4457]
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Finished server process [4458]
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Finished server process [4455]
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Finished server process [4456]
+[2023-11-18 22:23:28 +0500] [4457] [INFO] Worker exiting (pid: 4457)
+[2023-11-18 22:23:28 +0500] [4455] [INFO] Worker exiting (pid: 4455)
+[2023-11-18 22:23:28 +0500] [4454] [INFO] Worker exiting (pid: 4454)
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Finished server process [4460]
+[2023-11-18 22:23:28 +0500] [4460] [INFO] Worker exiting (pid: 4460)
+[2023-11-18 22:23:28 +0500] [4462] [INFO] Worker exiting (pid: 4462)
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Finished server process [4459]
+[2023-11-18 22:23:28 +0500] [4458] [INFO] Worker exiting (pid: 4458)
+[2023-11-18 22:23:28 +0500] [4456] [INFO] Worker exiting (pid: 4456)
+[2023-11-18 22:23:28 +0500] [4459] [INFO] Worker exiting (pid: 4459)
+[2023-11-18 22:23:29 +0500] [4446] [INFO] Shutting down: Master
+[2023-11-18 22:24:25 +0500] [12061] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fd43b2484a0>
+  on_reload: <function OnReload.on_reload at 0x7fd43b2485e0>
+  when_ready: <function WhenReady.when_ready at 0x7fd43b248720>
+  pre_fork: <function Prefork.pre_fork at 0x7fd43b248860>
+  post_fork: <function Postfork.post_fork at 0x7fd43b2489a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd43b248ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7fd43b248c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd43b248d60>
+  pre_exec: <function PreExec.pre_exec at 0x7fd43b248ea0>
+  pre_request: <function PreRequest.pre_request at 0x7fd43b248fe0>
+  post_request: <function PostRequest.post_request at 0x7fd43b249080>
+  child_exit: <function ChildExit.child_exit at 0x7fd43b2491c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd43b249300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd43b249440>
+  on_exit: <function OnExit.on_exit at 0x7fd43b249580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7fd43b249760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 22:24:25 +0500] [12061] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 22:24:25 +0500] [12061] [DEBUG] Arbiter booted
+[2023-11-18 22:24:25 +0500] [12061] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (12061)
+[2023-11-18 22:24:25 +0500] [12061] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 22:24:25 +0500] [12069] [INFO] Booting worker with pid: 12069
+[2023-11-18 22:24:25 +0500] [12070] [INFO] Booting worker with pid: 12070
+[2023-11-18 22:24:25 +0500] [12071] [INFO] Booting worker with pid: 12071
+[2023-11-18 22:24:25 +0500] [12072] [INFO] Booting worker with pid: 12072
+[2023-11-18 22:24:25 +0500] [12073] [INFO] Booting worker with pid: 12073
+[2023-11-18 22:24:25 +0500] [12074] [INFO] Booting worker with pid: 12074
+[2023-11-18 22:24:25 +0500] [12075] [INFO] Booting worker with pid: 12075
+[2023-11-18 22:24:25 +0500] [12076] [INFO] Booting worker with pid: 12076
+[2023-11-18 22:24:25 +0500] [12077] [INFO] Booting worker with pid: 12077
+[2023-11-18 22:24:25 +0500] [12061] [DEBUG] 9 workers
+[2023-11-18 22:24:27 +0500] [12069] [INFO] Started server process [12069]
+[2023-11-18 22:24:27 +0500] [12069] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12069] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12071] [INFO] Started server process [12071]
+[2023-11-18 22:24:27 +0500] [12071] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12071] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12070] [INFO] Started server process [12070]
+[2023-11-18 22:24:27 +0500] [12070] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12070] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12072] [INFO] Started server process [12072]
+[2023-11-18 22:24:27 +0500] [12072] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12072] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12075] [INFO] Started server process [12075]
+[2023-11-18 22:24:27 +0500] [12075] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12073] [INFO] Started server process [12073]
+[2023-11-18 22:24:27 +0500] [12073] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12075] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12073] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12074] [INFO] Started server process [12074]
+[2023-11-18 22:24:27 +0500] [12074] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12074] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12077] [INFO] Started server process [12077]
+[2023-11-18 22:24:27 +0500] [12077] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12077] [INFO] Application startup complete.
+[2023-11-18 22:24:27 +0500] [12076] [INFO] Started server process [12076]
+[2023-11-18 22:24:27 +0500] [12076] [INFO] Waiting for application startup.
+[2023-11-18 22:24:27 +0500] [12076] [INFO] Application startup complete.
+[2023-11-18 22:29:37 +0500] [12061] [INFO] Handling signal: term
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Shutting down
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Finished server process [12073]
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Finished server process [12076]
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Waiting for application shutdown.
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Finished server process [12072]
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12073] [INFO] Worker exiting (pid: 12073)
+[2023-11-18 22:29:37 +0500] [12076] [INFO] Worker exiting (pid: 12076)
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Application shutdown complete.
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Finished server process [12071]
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Finished server process [12077]
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Finished server process [12069]
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Finished server process [12070]
+[2023-11-18 22:29:37 +0500] [12069] [INFO] Worker exiting (pid: 12069)
+[2023-11-18 22:29:37 +0500] [12070] [INFO] Worker exiting (pid: 12070)
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Finished server process [12074]
+[2023-11-18 22:29:37 +0500] [12074] [INFO] Worker exiting (pid: 12074)
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Finished server process [12075]
+[2023-11-18 22:29:37 +0500] [12075] [INFO] Worker exiting (pid: 12075)
+[2023-11-18 22:29:37 +0500] [12072] [INFO] Worker exiting (pid: 12072)
+[2023-11-18 22:29:37 +0500] [12071] [INFO] Worker exiting (pid: 12071)
+[2023-11-18 22:29:37 +0500] [12077] [INFO] Worker exiting (pid: 12077)
+[2023-11-18 22:29:38 +0500] [12061] [INFO] Shutting down: Master
+[2023-11-18 22:45:44 +0500] [1512] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fa7a42a84a0>
+  on_reload: <function OnReload.on_reload at 0x7fa7a42a85e0>
+  when_ready: <function WhenReady.when_ready at 0x7fa7a42a8720>
+  pre_fork: <function Prefork.pre_fork at 0x7fa7a42a8860>
+  post_fork: <function Postfork.post_fork at 0x7fa7a42a89a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fa7a42a8ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7fa7a42a8c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fa7a42a8d60>
+  pre_exec: <function PreExec.pre_exec at 0x7fa7a42a8ea0>
+  pre_request: <function PreRequest.pre_request at 0x7fa7a42a8fe0>
+  post_request: <function PostRequest.post_request at 0x7fa7a42a9080>
+  child_exit: <function ChildExit.child_exit at 0x7fa7a42a91c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fa7a42a9300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fa7a42a9440>
+  on_exit: <function OnExit.on_exit at 0x7fa7a42a9580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7fa7a42a9760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 22:45:44 +0500] [1512] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 22:45:44 +0500] [1512] [DEBUG] Arbiter booted
+[2023-11-18 22:45:44 +0500] [1512] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (1512)
+[2023-11-18 22:45:44 +0500] [1512] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 22:45:44 +0500] [1530] [INFO] Booting worker with pid: 1530
+[2023-11-18 22:45:44 +0500] [1531] [INFO] Booting worker with pid: 1531
+[2023-11-18 22:45:44 +0500] [1532] [INFO] Booting worker with pid: 1532
+[2023-11-18 22:45:44 +0500] [1533] [INFO] Booting worker with pid: 1533
+[2023-11-18 22:45:44 +0500] [1534] [INFO] Booting worker with pid: 1534
+[2023-11-18 22:45:44 +0500] [1535] [INFO] Booting worker with pid: 1535
+[2023-11-18 22:45:44 +0500] [1536] [INFO] Booting worker with pid: 1536
+[2023-11-18 22:45:44 +0500] [1537] [INFO] Booting worker with pid: 1537
+[2023-11-18 22:45:45 +0500] [1538] [INFO] Booting worker with pid: 1538
+[2023-11-18 22:45:45 +0500] [1512] [DEBUG] 9 workers
+[2023-11-18 22:45:50 +0500] [1532] [INFO] Started server process [1532]
+[2023-11-18 22:45:50 +0500] [1533] [INFO] Started server process [1533]
+[2023-11-18 22:45:50 +0500] [1531] [INFO] Started server process [1531]
+[2023-11-18 22:45:50 +0500] [1538] [INFO] Started server process [1538]
+[2023-11-18 22:45:50 +0500] [1531] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1532] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1534] [INFO] Started server process [1534]
+[2023-11-18 22:45:50 +0500] [1533] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1538] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1534] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1532] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1531] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1533] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1538] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1534] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1530] [INFO] Started server process [1530]
+[2023-11-18 22:45:50 +0500] [1537] [INFO] Started server process [1537]
+[2023-11-18 22:45:50 +0500] [1536] [INFO] Started server process [1536]
+[2023-11-18 22:45:50 +0500] [1535] [INFO] Started server process [1535]
+[2023-11-18 22:45:50 +0500] [1530] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1537] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1536] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1535] [INFO] Waiting for application startup.
+[2023-11-18 22:45:50 +0500] [1530] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1537] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1536] [INFO] Application startup complete.
+[2023-11-18 22:45:50 +0500] [1535] [INFO] Application startup complete.
+[2023-11-18 22:48:02 +0500] [1512] [INFO] Handling signal: term
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Shutting down
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Waiting for application shutdown.
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Finished server process [1534]
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Finished server process [1530]
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Application shutdown complete.
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Finished server process [1535]
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Finished server process [1533]
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Finished server process [1531]
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Finished server process [1537]
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Finished server process [1536]
+[2023-11-18 22:48:02 +0500] [1534] [INFO] Worker exiting (pid: 1534)
+[2023-11-18 22:48:02 +0500] [1535] [INFO] Worker exiting (pid: 1535)
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Finished server process [1532]
+[2023-11-18 22:48:02 +0500] [1532] [INFO] Worker exiting (pid: 1532)
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Finished server process [1538]
+[2023-11-18 22:48:02 +0500] [1530] [INFO] Worker exiting (pid: 1530)
+[2023-11-18 22:48:02 +0500] [1533] [INFO] Worker exiting (pid: 1533)
+[2023-11-18 22:48:02 +0500] [1538] [INFO] Worker exiting (pid: 1538)
+[2023-11-18 22:48:02 +0500] [1531] [INFO] Worker exiting (pid: 1531)
+[2023-11-18 22:48:02 +0500] [1537] [INFO] Worker exiting (pid: 1537)
+[2023-11-18 22:48:02 +0500] [1536] [INFO] Worker exiting (pid: 1536)
+[2023-11-18 22:48:04 +0500] [1512] [INFO] Shutting down: Master
+[2023-11-18 22:48:52 +0500] [2491] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f77037804a0>
+  on_reload: <function OnReload.on_reload at 0x7f77037805e0>
+  when_ready: <function WhenReady.when_ready at 0x7f7703780720>
+  pre_fork: <function Prefork.pre_fork at 0x7f7703780860>
+  post_fork: <function Postfork.post_fork at 0x7f77037809a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f7703780ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7f7703780c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f7703780d60>
+  pre_exec: <function PreExec.pre_exec at 0x7f7703780ea0>
+  pre_request: <function PreRequest.pre_request at 0x7f7703780fe0>
+  post_request: <function PostRequest.post_request at 0x7f7703781080>
+  child_exit: <function ChildExit.child_exit at 0x7f77037811c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f7703781300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f7703781440>
+  on_exit: <function OnExit.on_exit at 0x7f7703781580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7f7703781760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 22:48:52 +0500] [2491] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 22:48:53 +0500] [2491] [DEBUG] Arbiter booted
+[2023-11-18 22:48:53 +0500] [2491] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (2491)
+[2023-11-18 22:48:53 +0500] [2491] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 22:48:53 +0500] [2500] [INFO] Booting worker with pid: 2500
+[2023-11-18 22:48:53 +0500] [2504] [INFO] Booting worker with pid: 2504
+[2023-11-18 22:48:53 +0500] [2505] [INFO] Booting worker with pid: 2505
+[2023-11-18 22:48:53 +0500] [2506] [INFO] Booting worker with pid: 2506
+[2023-11-18 22:48:54 +0500] [2507] [INFO] Booting worker with pid: 2507
+[2023-11-18 22:48:54 +0500] [2508] [INFO] Booting worker with pid: 2508
+[2023-11-18 22:48:54 +0500] [2509] [INFO] Booting worker with pid: 2509
+[2023-11-18 22:48:54 +0500] [2515] [INFO] Booting worker with pid: 2515
+[2023-11-18 22:48:54 +0500] [2516] [INFO] Booting worker with pid: 2516
+[2023-11-18 22:48:54 +0500] [2491] [DEBUG] 9 workers
+[2023-11-18 22:48:56 +0500] [2500] [INFO] Started server process [2500]
+[2023-11-18 22:48:56 +0500] [2500] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2500] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2504] [INFO] Started server process [2504]
+[2023-11-18 22:48:56 +0500] [2504] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2504] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2505] [INFO] Started server process [2505]
+[2023-11-18 22:48:56 +0500] [2505] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2505] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2506] [INFO] Started server process [2506]
+[2023-11-18 22:48:56 +0500] [2506] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2506] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2508] [INFO] Started server process [2508]
+[2023-11-18 22:48:56 +0500] [2508] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2508] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2509] [INFO] Started server process [2509]
+[2023-11-18 22:48:56 +0500] [2509] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2509] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2515] [INFO] Started server process [2515]
+[2023-11-18 22:48:56 +0500] [2515] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2515] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2507] [INFO] Started server process [2507]
+[2023-11-18 22:48:56 +0500] [2507] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2507] [INFO] Application startup complete.
+[2023-11-18 22:48:56 +0500] [2516] [INFO] Started server process [2516]
+[2023-11-18 22:48:56 +0500] [2516] [INFO] Waiting for application startup.
+[2023-11-18 22:48:56 +0500] [2516] [INFO] Application startup complete.
+[2023-11-18 22:59:30 +0500] [4512] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fcd5c2484a0>
+  on_reload: <function OnReload.on_reload at 0x7fcd5c2485e0>
+  when_ready: <function WhenReady.when_ready at 0x7fcd5c248720>
+  pre_fork: <function Prefork.pre_fork at 0x7fcd5c248860>
+  post_fork: <function Postfork.post_fork at 0x7fcd5c2489a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fcd5c248ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7fcd5c248c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fcd5c248d60>
+  pre_exec: <function PreExec.pre_exec at 0x7fcd5c248ea0>
+  pre_request: <function PreRequest.pre_request at 0x7fcd5c248fe0>
+  post_request: <function PostRequest.post_request at 0x7fcd5c249080>
+  child_exit: <function ChildExit.child_exit at 0x7fcd5c2491c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fcd5c249300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fcd5c249440>
+  on_exit: <function OnExit.on_exit at 0x7fcd5c249580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7fcd5c249760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 22:59:30 +0500] [4512] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 22:59:32 +0500] [4512] [DEBUG] Arbiter booted
+[2023-11-18 22:59:32 +0500] [4512] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (4512)
+[2023-11-18 22:59:32 +0500] [4512] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 22:59:32 +0500] [4523] [INFO] Booting worker with pid: 4523
+[2023-11-18 22:59:32 +0500] [4527] [INFO] Booting worker with pid: 4527
+[2023-11-18 22:59:32 +0500] [4533] [INFO] Booting worker with pid: 4533
+[2023-11-18 22:59:32 +0500] [4534] [INFO] Booting worker with pid: 4534
+[2023-11-18 22:59:32 +0500] [4535] [INFO] Booting worker with pid: 4535
+[2023-11-18 22:59:32 +0500] [4536] [INFO] Booting worker with pid: 4536
+[2023-11-18 22:59:32 +0500] [4537] [INFO] Booting worker with pid: 4537
+[2023-11-18 22:59:32 +0500] [4538] [INFO] Booting worker with pid: 4538
+[2023-11-18 22:59:32 +0500] [4539] [INFO] Booting worker with pid: 4539
+[2023-11-18 22:59:32 +0500] [4512] [DEBUG] 9 workers
+[2023-11-18 22:59:34 +0500] [4523] [INFO] Started server process [4523]
+[2023-11-18 22:59:34 +0500] [4523] [INFO] Waiting for application startup.
+[2023-11-18 22:59:34 +0500] [4523] [INFO] Application startup complete.
+[2023-11-18 22:59:34 +0500] [4533] [INFO] Started server process [4533]
+[2023-11-18 22:59:34 +0500] [4533] [INFO] Waiting for application startup.
+[2023-11-18 22:59:34 +0500] [4533] [INFO] Application startup complete.
+[2023-11-18 22:59:34 +0500] [4527] [INFO] Started server process [4527]
+[2023-11-18 22:59:34 +0500] [4527] [INFO] Waiting for application startup.
+[2023-11-18 22:59:34 +0500] [4527] [INFO] Application startup complete.
+[2023-11-18 22:59:34 +0500] [4534] [INFO] Started server process [4534]
+[2023-11-18 22:59:34 +0500] [4534] [INFO] Waiting for application startup.
+[2023-11-18 22:59:34 +0500] [4534] [INFO] Application startup complete.
+[2023-11-18 22:59:34 +0500] [4535] [INFO] Started server process [4535]
+[2023-11-18 22:59:34 +0500] [4535] [INFO] Waiting for application startup.
+[2023-11-18 22:59:34 +0500] [4535] [INFO] Application startup complete.
+[2023-11-18 22:59:35 +0500] [4536] [INFO] Started server process [4536]
+[2023-11-18 22:59:35 +0500] [4536] [INFO] Waiting for application startup.
+[2023-11-18 22:59:35 +0500] [4537] [INFO] Started server process [4537]
+[2023-11-18 22:59:35 +0500] [4536] [INFO] Application startup complete.
+[2023-11-18 22:59:35 +0500] [4537] [INFO] Waiting for application startup.
+[2023-11-18 22:59:35 +0500] [4537] [INFO] Application startup complete.
+[2023-11-18 22:59:35 +0500] [4539] [INFO] Started server process [4539]
+[2023-11-18 22:59:35 +0500] [4539] [INFO] Waiting for application startup.
+[2023-11-18 22:59:35 +0500] [4539] [INFO] Application startup complete.
+[2023-11-18 22:59:35 +0500] [4538] [INFO] Started server process [4538]
+[2023-11-18 22:59:35 +0500] [4538] [INFO] Waiting for application startup.
+[2023-11-18 22:59:35 +0500] [4538] [INFO] Application startup complete.
+[2023-11-18 23:03:22 +0500] [4512] [INFO] Handling signal: int
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Shutting down
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Finished server process [4539]
+[2023-11-18 23:03:22 +0500] [4539] [INFO] Worker exiting (pid: 4539)
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Finished server process [4534]
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4534] [INFO] Worker exiting (pid: 4534)
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Finished server process [4523]
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4523] [INFO] Worker exiting (pid: 4523)
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Finished server process [4533]
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Finished server process [4536]
+[2023-11-18 23:03:22 +0500] [4533] [INFO] Worker exiting (pid: 4533)
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Finished server process [4527]
+[2023-11-18 23:03:22 +0500] [4527] [INFO] Worker exiting (pid: 4527)
+[2023-11-18 23:03:22 +0500] [4536] [INFO] Worker exiting (pid: 4536)
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Finished server process [4535]
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Finished server process [4537]
+[2023-11-18 23:03:22 +0500] [4537] [INFO] Worker exiting (pid: 4537)
+[2023-11-18 23:03:22 +0500] [4535] [INFO] Worker exiting (pid: 4535)
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Waiting for application shutdown.
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Application shutdown complete.
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Finished server process [4538]
+[2023-11-18 23:03:22 +0500] [4538] [INFO] Worker exiting (pid: 4538)
+[2023-11-18 23:03:23 +0500] [4512] [INFO] Shutting down: Master
+[2023-11-18 23:04:55 +0500] [2491] [INFO] Handling signal: term
+[2023-11-18 23:04:55 +0500] [2509] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2500] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2504] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2505] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2515] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2507] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2508] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2506] [INFO] Shutting down
+[2023-11-18 23:04:55 +0500] [2516] [INFO] Shutting down
+[2023-11-18 23:04:56 +0500] [2508] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2509] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2500] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2504] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2505] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2515] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2507] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2506] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:56 +0500] [2516] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:04:57 +0500] [2508] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2509] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2505] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2504] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2516] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2500] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2508] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2515] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2506] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2507] [INFO] Waiting for application shutdown.
+[2023-11-18 23:04:57 +0500] [2509] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2505] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2509] [INFO] Finished server process [2509]
+[2023-11-18 23:04:57 +0500] [2504] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2516] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2504] [INFO] Finished server process [2504]
+[2023-11-18 23:04:57 +0500] [2500] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2508] [INFO] Finished server process [2508]
+[2023-11-18 23:04:57 +0500] [2515] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2506] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2507] [INFO] Application shutdown complete.
+[2023-11-18 23:04:57 +0500] [2505] [INFO] Finished server process [2505]
+[2023-11-18 23:04:57 +0500] [2516] [INFO] Finished server process [2516]
+[2023-11-18 23:04:57 +0500] [2509] [INFO] Worker exiting (pid: 2509)
+[2023-11-18 23:04:57 +0500] [2508] [INFO] Worker exiting (pid: 2508)
+[2023-11-18 23:04:57 +0500] [2505] [INFO] Worker exiting (pid: 2505)
+[2023-11-18 23:04:57 +0500] [2500] [INFO] Finished server process [2500]
+[2023-11-18 23:04:57 +0500] [2504] [INFO] Worker exiting (pid: 2504)
+[2023-11-18 23:04:57 +0500] [2515] [INFO] Finished server process [2515]
+[2023-11-18 23:04:57 +0500] [2506] [INFO] Finished server process [2506]
+[2023-11-18 23:04:57 +0500] [2515] [INFO] Worker exiting (pid: 2515)
+[2023-11-18 23:04:57 +0500] [2507] [INFO] Finished server process [2507]
+[2023-11-18 23:04:57 +0500] [2516] [INFO] Worker exiting (pid: 2516)
+[2023-11-18 23:04:57 +0500] [2500] [INFO] Worker exiting (pid: 2500)
+[2023-11-18 23:04:57 +0500] [2507] [INFO] Worker exiting (pid: 2507)
+[2023-11-18 23:04:57 +0500] [2506] [INFO] Worker exiting (pid: 2506)
+[2023-11-18 23:07:35 +0500] [1799] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f778a9044a0>
+  on_reload: <function OnReload.on_reload at 0x7f778a9045e0>
+  when_ready: <function WhenReady.when_ready at 0x7f778a904720>
+  pre_fork: <function Prefork.pre_fork at 0x7f778a904860>
+  post_fork: <function Postfork.post_fork at 0x7f778a9049a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f778a904ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7f778a904c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f778a904d60>
+  pre_exec: <function PreExec.pre_exec at 0x7f778a904ea0>
+  pre_request: <function PreRequest.pre_request at 0x7f778a904fe0>
+  post_request: <function PostRequest.post_request at 0x7f778a905080>
+  child_exit: <function ChildExit.child_exit at 0x7f778a9051c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f778a905300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f778a905440>
+  on_exit: <function OnExit.on_exit at 0x7f778a905580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7f778a905760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-18 23:07:35 +0500] [1799] [INFO] Starting gunicorn 21.2.0
+[2023-11-18 23:07:35 +0500] [1799] [DEBUG] Arbiter booted
+[2023-11-18 23:07:35 +0500] [1799] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (1799)
+[2023-11-18 23:07:35 +0500] [1799] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-18 23:07:35 +0500] [1807] [INFO] Booting worker with pid: 1807
+[2023-11-18 23:07:35 +0500] [1808] [INFO] Booting worker with pid: 1808
+[2023-11-18 23:07:35 +0500] [1809] [INFO] Booting worker with pid: 1809
+[2023-11-18 23:07:35 +0500] [1810] [INFO] Booting worker with pid: 1810
+[2023-11-18 23:07:35 +0500] [1811] [INFO] Booting worker with pid: 1811
+[2023-11-18 23:07:35 +0500] [1812] [INFO] Booting worker with pid: 1812
+[2023-11-18 23:07:35 +0500] [1813] [INFO] Booting worker with pid: 1813
+[2023-11-18 23:07:36 +0500] [1814] [INFO] Booting worker with pid: 1814
+[2023-11-18 23:07:36 +0500] [1815] [INFO] Booting worker with pid: 1815
+[2023-11-18 23:07:36 +0500] [1799] [DEBUG] 9 workers
+[2023-11-18 23:07:40 +0500] [1815] [INFO] Started server process [1815]
+[2023-11-18 23:07:40 +0500] [1811] [INFO] Started server process [1811]
+[2023-11-18 23:07:40 +0500] [1814] [INFO] Started server process [1814]
+[2023-11-18 23:07:40 +0500] [1807] [INFO] Started server process [1807]
+[2023-11-18 23:07:40 +0500] [1813] [INFO] Started server process [1813]
+[2023-11-18 23:07:40 +0500] [1815] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1809] [INFO] Started server process [1809]
+[2023-11-18 23:07:40 +0500] [1811] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1810] [INFO] Started server process [1810]
+[2023-11-18 23:07:40 +0500] [1814] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1807] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1813] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1809] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1815] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1810] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1811] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1809] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1814] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1807] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1813] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1810] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1808] [INFO] Started server process [1808]
+[2023-11-18 23:07:40 +0500] [1808] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1808] [INFO] Application startup complete.
+[2023-11-18 23:07:40 +0500] [1812] [INFO] Started server process [1812]
+[2023-11-18 23:07:40 +0500] [1812] [INFO] Waiting for application startup.
+[2023-11-18 23:07:40 +0500] [1812] [INFO] Application startup complete.
+[2023-11-18 23:20:48 +0500] [1799] [INFO] Handling signal: term
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Shutting down
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Finished server process [1813]
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Finished server process [1808]
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1808] [INFO] Worker exiting (pid: 1808)
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Finished server process [1811]
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1813] [INFO] Worker exiting (pid: 1813)
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Finished server process [1810]
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Finished server process [1814]
+[2023-11-18 23:20:48 +0500] [1810] [INFO] Worker exiting (pid: 1810)
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Finished server process [1815]
+[2023-11-18 23:20:48 +0500] [1815] [INFO] Worker exiting (pid: 1815)
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Finished server process [1812]
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Finished server process [1807]
+[2023-11-18 23:20:48 +0500] [1811] [INFO] Worker exiting (pid: 1811)
+[2023-11-18 23:20:48 +0500] [1814] [INFO] Worker exiting (pid: 1814)
+[2023-11-18 23:20:48 +0500] [1807] [INFO] Worker exiting (pid: 1807)
+[2023-11-18 23:20:48 +0500] [1812] [INFO] Worker exiting (pid: 1812)
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Waiting for application shutdown.
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Application shutdown complete.
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Finished server process [1809]
+[2023-11-18 23:20:48 +0500] [1809] [INFO] Worker exiting (pid: 1809)
+[2023-11-18 23:20:49 +0500] [1799] [INFO] Shutting down: Master
+[2023-11-20 08:42:12 +0500] [1865] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock']
+  backlog: 2048
+  workers: 9
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /mnt/hard/PycharmProjects/OT
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /mnt/hard/PycharmProjects/OT/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /mnt/hard/PycharmProjects/OT/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  logconfig_json: None
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: main:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f185ba484a0>
+  on_reload: <function OnReload.on_reload at 0x7f185ba485e0>
+  when_ready: <function WhenReady.when_ready at 0x7f185ba48720>
+  pre_fork: <function Prefork.pre_fork at 0x7f185ba48860>
+  post_fork: <function Postfork.post_fork at 0x7f185ba489a0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f185ba48ae0>
+  worker_int: <function WorkerInt.worker_int at 0x7f185ba48c20>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f185ba48d60>
+  pre_exec: <function PreExec.pre_exec at 0x7f185ba48ea0>
+  pre_request: <function PreRequest.pre_request at 0x7f185ba48fe0>
+  post_request: <function PostRequest.post_request at 0x7f185ba49080>
+  child_exit: <function ChildExit.child_exit at 0x7f185ba491c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f185ba49300>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f185ba49440>
+  on_exit: <function OnExit.on_exit at 0x7f185ba49580>
+  ssl_context: <function NewSSLContext.ssl_context at 0x7f185ba49760>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-11-20 08:42:13 +0500] [1865] [INFO] Starting gunicorn 21.2.0
+[2023-11-20 08:42:13 +0500] [1865] [DEBUG] Arbiter booted
+[2023-11-20 08:42:13 +0500] [1865] [INFO] Listening at: unix:/mnt/hard/PycharmProjects/OT/gunicorn.sock (1865)
+[2023-11-20 08:42:13 +0500] [1865] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-11-20 08:42:13 +0500] [1873] [INFO] Booting worker with pid: 1873
+[2023-11-20 08:42:13 +0500] [1874] [INFO] Booting worker with pid: 1874
+[2023-11-20 08:42:13 +0500] [1875] [INFO] Booting worker with pid: 1875
+[2023-11-20 08:42:13 +0500] [1876] [INFO] Booting worker with pid: 1876
+[2023-11-20 08:42:13 +0500] [1877] [INFO] Booting worker with pid: 1877
+[2023-11-20 08:42:13 +0500] [1878] [INFO] Booting worker with pid: 1878
+[2023-11-20 08:42:13 +0500] [1879] [INFO] Booting worker with pid: 1879
+[2023-11-20 08:42:13 +0500] [1880] [INFO] Booting worker with pid: 1880
+[2023-11-20 08:42:13 +0500] [1881] [INFO] Booting worker with pid: 1881
+[2023-11-20 08:42:13 +0500] [1865] [DEBUG] 9 workers
+[2023-11-20 08:42:18 +0500] [1873] [INFO] Started server process [1873]
+[2023-11-20 08:42:18 +0500] [1874] [INFO] Started server process [1874]
+[2023-11-20 08:42:18 +0500] [1873] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1875] [INFO] Started server process [1875]
+[2023-11-20 08:42:18 +0500] [1878] [INFO] Started server process [1878]
+[2023-11-20 08:42:18 +0500] [1874] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1877] [INFO] Started server process [1877]
+[2023-11-20 08:42:18 +0500] [1875] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1876] [INFO] Started server process [1876]
+[2023-11-20 08:42:18 +0500] [1878] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1874] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1873] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1877] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1876] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1875] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1878] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1877] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1876] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1879] [INFO] Started server process [1879]
+[2023-11-20 08:42:18 +0500] [1879] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1881] [INFO] Started server process [1881]
+[2023-11-20 08:42:18 +0500] [1881] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1879] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1881] [INFO] Application startup complete.
+[2023-11-20 08:42:18 +0500] [1880] [INFO] Started server process [1880]
+[2023-11-20 08:42:18 +0500] [1880] [INFO] Waiting for application startup.
+[2023-11-20 08:42:18 +0500] [1880] [INFO] Application startup complete.
