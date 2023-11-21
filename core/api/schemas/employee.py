@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from .exams import ExamResponse
 
 
 class EmployeeBase(BaseModel):
@@ -18,13 +19,16 @@ class EmployeeSchema_v2(EmployeeBase):
     position: str
     subdivision: str
     division: str
-    certificate: int
+    certificate: int | None
+
+class EmployeeSchemWithExams(EmployeeSchema_v2):
+    exams: list[ExamResponse]
 
 class EmployeeUpdate(EmployeeBase):
     fio: str | None = None
     position_id: int | None = None
     subdivision_id: int | None = None
-    is_active: bool
+    is_active: bool | None = None
 
 class CreateEmployee(EmployeeBase):
     is_active: bool

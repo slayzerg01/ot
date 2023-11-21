@@ -1236,3 +1236,59 @@
 [2023-11-20 08:42:18 +0500] [1880] [INFO] Started server process [1880]
 [2023-11-20 08:42:18 +0500] [1880] [INFO] Waiting for application startup.
 [2023-11-20 08:42:18 +0500] [1880] [INFO] Application startup complete.
+[2023-11-20 12:52:59 +0500] [1865] [INFO] Handling signal: term
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Shutting down
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Finished server process [1876]
+[2023-11-20 12:52:59 +0500] [1876] [INFO] Worker exiting (pid: 1876)
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Waiting for application shutdown.
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Finished server process [1873]
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Finished server process [1874]
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Finished server process [1881]
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Finished server process [1875]
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Finished server process [1880]
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Finished server process [1878]
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Application shutdown complete.
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Finished server process [1879]
+[2023-11-20 12:52:59 +0500] [1874] [INFO] Worker exiting (pid: 1874)
+[2023-11-20 12:52:59 +0500] [1881] [INFO] Worker exiting (pid: 1881)
+[2023-11-20 12:52:59 +0500] [1875] [INFO] Worker exiting (pid: 1875)
+[2023-11-20 12:52:59 +0500] [1873] [INFO] Worker exiting (pid: 1873)
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Finished server process [1877]
+[2023-11-20 12:52:59 +0500] [1877] [INFO] Worker exiting (pid: 1877)
+[2023-11-20 12:52:59 +0500] [1880] [INFO] Worker exiting (pid: 1880)
+[2023-11-20 12:52:59 +0500] [1878] [INFO] Worker exiting (pid: 1878)
+[2023-11-20 12:52:59 +0500] [1879] [INFO] Worker exiting (pid: 1879)
+[2023-11-20 12:53:00 +0500] [1865] [INFO] Shutting down: Master
