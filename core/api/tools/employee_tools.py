@@ -43,6 +43,10 @@ async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, sub
         stmt = select(Certificate).where(Certificate.employee_id == employee.id)
         res: Result = await session.execute(stmt)
         cer: Certificate = res.scalar_one_or_none()
+        if cer:
+            cer = cer.number
+        else:
+            cer = None
         if employee.subdivision.name == subdivision or subdivision == None:
             res: EmployeeSchema_v2 = EmployeeSchema_v2(
                 fio=employee.FIO,
@@ -53,7 +57,7 @@ async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, sub
                 subdivision_id=employee.subdivision.id,
                 division = div.name,
                 division_id = div.id, 
-                certificate = cer.number
+                certificate = cer
             )
             result.append(res)
     return result

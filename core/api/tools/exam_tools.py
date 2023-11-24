@@ -18,7 +18,10 @@ async def get_all_exams_by_id(session: AsyncSession, skip: int | None, limit: in
             exam_name = exam.exam_type.name,
             exam_type_id = exam.exam_type_id,
             date = exam.date,
-            next_date = exam.next_date
+            next_date = exam.next_date,
+            protocol=exam.protocol,
+            notation=exam.notation,
+            place=exam.place
         )
         
         result.append(res)

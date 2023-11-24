@@ -13,9 +13,24 @@ from core.api.routers import employee
 from core.api.routers import exam_types
 
 from core.api.tools.position_tools import get_all_positions
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+origins = [
+    "*",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 folder = os.path.dirname(__file__)
 app.mount("/static", StaticFiles(directory=folder+"/static",html=True), name="static")
