@@ -136,7 +136,6 @@ async def update_employee(session: AsyncSession, employee: Employee, employee_up
     #     setattr(employee, name, value)
     try:
         update_data = employee_update.model_dump(exclude_unset=True)
-        update_data = employee_update.model_dump(exclude_unset=True)
         if 'fio' in update_data:
             update_data['FIO'] = update_data.pop('fio')
         id = employee.id

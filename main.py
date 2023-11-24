@@ -11,6 +11,7 @@ from core.api.schemas.position import PositionSchema
 
 from core.api.routers import employee
 from core.api.routers import exam_types
+from core.api.routers import divisions
 
 from core.api.tools.position_tools import get_all_positions
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,6 +39,7 @@ templates = Jinja2Templates(directory=folder+"/static/templates")
 
 app.include_router(employee.router)
 app.include_router(exam_types.router)
+app.include_router(divisions.router)
 
 @app.get("/")
 async def root(request: Request, division: str | None = None, session: AsyncSession = Depends(get_async_session)):
