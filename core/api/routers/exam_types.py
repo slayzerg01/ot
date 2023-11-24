@@ -11,5 +11,5 @@ router = APIRouter(
 )
 
 @router.get("/", summary="get all exam types")
-async def read_employees(skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[ExamTypeResponse]: 
-    return await get_all_exam_types(session, skip, limit)
+async def read_employees(session: AsyncSession = Depends(get_async_session)) -> list[ExamTypeResponse]: 
+    return await get_all_exam_types(session)

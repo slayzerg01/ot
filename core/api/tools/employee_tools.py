@@ -63,7 +63,7 @@ async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, sub
     return result
 
 async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: int, subdivision: int | None) -> list[EmployeeSchemWithExams]:
-    stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
+    stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).order_by(Employee.FIO).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
     result = []

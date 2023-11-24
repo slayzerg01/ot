@@ -7,8 +7,8 @@ from core.api.schemas.exam_types import ExamTypeResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-async def get_all_exam_types(session: AsyncSession, skip: int, limit: int) -> list[ExamTypeResponse]:
-    stmt = select(ExamType).offset(skip).limit(limit)
+async def get_all_exam_types(session: AsyncSession) -> list[ExamTypeResponse]:
+    stmt = select(ExamType).order_by(ExamType.name)
     res: Result = await session.execute(stmt)
     exam_types: list[ExamType] = res.scalars().all()
     result = []

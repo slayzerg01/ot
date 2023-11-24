@@ -43,7 +43,7 @@ async def read_employees(new_employee: CreateEmployee, session: AsyncSession = D
         except IntegrityError as ex:
             raise HTTPException(status_code=400, detail=str(ex))
     
-@router.get("/del/{employee_id}/", summary="delete employee")
+@router.delete("/del/{employee_id}/", summary="delete employee")
 async def read_employees(employee: Employee = Depends(employee_by_id), session: AsyncSession = Depends(get_async_session)):
     await del_employee(employee, session)
     return [{"detail": f"{employee.fio} was deleted"}]
@@ -52,7 +52,7 @@ async def read_employees(employee: Employee = Depends(employee_by_id), session: 
 async def read_employees(employee: Employee = Depends(employee_by_id)) -> EmployeeSchema:
     return employee
 
-@router.put("/update/{employee_id}/", summary="update employee")
+@router.patch("/update/{employee_id}/", summary="update employee")
 async def update(employee_update: EmployeeUpdate, employee: Employee = Depends(employee_by_id), session: AsyncSession = Depends(get_async_session)):
     return await update_employee(
         session = session,

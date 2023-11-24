@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def get_all_divisions(session: AsyncSession) -> list[DivisionResponse]:
-    stmt = select(Division)
+    stmt = select(Division).order_by(Division.name)
     res: Result = await session.execute(stmt)
     divisions: list[Division] = res.scalars().all()
     result = []

@@ -72,7 +72,7 @@ app.include_router(exam_types.router)
 app.include_router(divisions.router)
 
 app.include_router(
-    fastapi_users.get_auth_router(auth_backend),
+    fastapi_users.get_auth_router(auth_backend, requires_verification=True),
     prefix="/auth/jwt",
     tags=["auth"],
 )
@@ -92,7 +92,7 @@ app.include_router(
     tags=["auth"],
 )
 app.include_router(
-    fastapi_users.get_users_router(UserRead, UserUpdate),
+    fastapi_users.get_users_router(UserRead, UserUpdate, requires_verification=True),
     prefix="/users",
     tags=["users"],
 )
