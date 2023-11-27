@@ -13,8 +13,8 @@ router = APIRouter(
 )
 
 @router.get("/get_all_with_exams", summary="get all employees with exams")
-async def read_employees(subdivision: int = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchemWithExams]: 
-    return await get_all_employees_with_exams(session, skip, limit, subdivision)
+async def read_employees(division: int = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchemWithExams]: 
+    return await get_all_employees_with_exams(session, skip, limit, division)
 
 @router.get("/", summary="get all employees")
 async def read_employees(subdivision: str = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchema]: 

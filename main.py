@@ -12,6 +12,7 @@ from core.api.schemas.position import PositionSchema
 from core.api.routers import employee
 from core.api.routers import exam_types
 from core.api.routers import divisions
+from core.api.routers import subdivision
 
 from core.api.tools.position_tools import get_all_positions
 from fastapi.middleware.cors import CORSMiddleware
@@ -27,9 +28,7 @@ import uuid
 app = FastAPI()
 
 origins = [
-    "*",
-    "http://localhost",
-    "http://localhost:8080",
+    "*"
 ]
 
 app.add_middleware(
@@ -64,12 +63,13 @@ current_active_verified_user = fastapi_users.current_user(active=True, verified=
 
 
 folder = os.path.dirname(__file__)
-app.mount("/static", StaticFiles(directory=folder+"/static",html=True), name="static")
-templates = Jinja2Templates(directory=folder+"/static/templates")
+app.mount("/static", StaticFiles(directory=folder+"/static/external/OT", html=True), name="static")
+templates = Jinja2Templates(directory=folder+"/static/external/OT")
 
 app.include_router(employee.router)
 app.include_router(exam_types.router)
 app.include_router(divisions.router)
+app.include_router(subdivision.router)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend, requires_verification=True),
@@ -102,12 +102,12 @@ app.include_router(
 async def root(
     request: Request, 
     division: str | None = None, 
-    user: User = Depends(current_active_verified_user),
+    
     session: AsyncSession = Depends(get_async_session)
 ):
     employees: list[EmployeeSchema_v2] = await employee.get_all_employees_v2(session=session, skip=0, limit=10, subdivision=division)
     positions: list[PositionSchema] = await get_all_positions(session=session)
-    return templates.TemplateResponse("employees_list.html",
+    return templates.TemplateResponse("index.html",
                                       {"request": request,
                                        "employees": employees,
                                        "positions": positions})

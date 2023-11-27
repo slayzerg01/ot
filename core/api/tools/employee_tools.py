@@ -62,7 +62,7 @@ async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, sub
             result.append(res)
     return result
 
-async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: int, subdivision: int | None) -> list[EmployeeSchemWithExams]:
+async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: int, division: int | None) -> list[EmployeeSchemWithExams]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).order_by(Employee.FIO).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -80,7 +80,7 @@ async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: 
         else:
             certificate = None
         exams_by_id: list[ExamResponse] = await get_all_exams_by_id(session=session, skip=0, limit=10, id=employee.id)
-        if employee.subdivision.id == subdivision or subdivision == None:
+        if div.id == division or division == None:
             res: EmployeeSchemWithExams = EmployeeSchemWithExams(
                 fio=employee.FIO,
                 id=employee.id,
