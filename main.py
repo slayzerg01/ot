@@ -1,12 +1,12 @@
-from fastapi import FastAPI, Depends, Request
-from sqlalchemy import insert
+from fastapi import FastAPI, Depends, Request, HTTPException, status
+from fastapi.responses import RedirectResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 import os
 
 from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from core.api.schemas.employee import EmployeeSchema, EmployeeSchema_v2
+from core.api.schemas.employee import EmployeeSchema_v2
 from core.api.schemas.position import PositionSchema
 
 from core.api.routers import employee
@@ -59,7 +59,7 @@ fastapi_users = FastAPIUsers[User, uuid.UUID](
 )
 
 current_user = fastapi_users.current_user()
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
+current_active_verified_user = fastapi_users.current_user(active=True, verified=True, optional=True)
 
 
 folder = os.path.dirname(__file__)
@@ -102,27 +102,27 @@ app.include_router(
 async def root(
     request: Request, 
     division: str | None = None, 
-    
+    user: User | None = Depends(current_active_verified_user),
     session: AsyncSession = Depends(get_async_session)
-):
-    employees: list[EmployeeSchema_v2] = await employee.get_all_employees_v2(session=session, skip=0, limit=10, subdivision=division)
-    positions: list[PositionSchema] = await get_all_positions(session=session)
-    return templates.TemplateResponse("index.html",
-                                      {"request": request,
-                                       "employees": employees,
-                                       "positions": positions})
+):  
+    if user is not None:
+        employees: list[EmployeeSchema_v2] = await employee.get_all_employees_v2(session=session, skip=0, limit=10, subdivision=division)
+        positions: list[PositionSchema] = await get_all_positions(session=session)
+        return templates.TemplateResponse("index.html",
+                                            {"request": request,
+                                            "employees": employees,
+                                            "positions": positions})
+    else:
+        return RedirectResponse(url="/login")
 
-@app.get("/subdivisions")
-async def root(request: Request, session: AsyncSession = Depends(get_async_session)):
-    # stmt = insert(Position).values(
-    #         name="test"
-    #     )
-    # print(stmt)
-    # await session.execute(stmt)
-    # await session.commit()
-    return templates.TemplateResponse("subdivisions-settings.html",
+
+@app.get("/login")
+async def root(request: Request):
+    return templates.TemplateResponse("login.html",
                                       {"request": request})
 
-@app.get("/test")
-async def root():
-    return True
+# @app.exception_handler(HTTPException)
+# async def http_exception(request: Request, exc: HTTPException):
+#     if exc.status_code == 401:
+#          return RedirectResponse(url="/login")
+#     #return {"detail": exc.detail}
