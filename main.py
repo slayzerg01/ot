@@ -15,6 +15,7 @@ from core.api.routers import divisions
 from core.api.routers import subdivision
 
 from core.api.tools.position_tools import get_all_positions
+from core.api.tools.certificates_tool import get_all_certificates
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
@@ -58,8 +59,8 @@ fastapi_users = FastAPIUsers[User, uuid.UUID](
     [auth_backend],
 )
 
-current_user = fastapi_users.current_user()
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True, optional=True)
+current_user = fastapi_users.current_user(optional=True)
+current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
 
 
 folder = os.path.dirname(__file__)
@@ -102,7 +103,7 @@ app.include_router(
 async def root(
     request: Request, 
     division: str | None = None, 
-    user: User | None = Depends(current_active_verified_user),
+    user: User | None = Depends(current_user),
     session: AsyncSession = Depends(get_async_session)
 ):  
     if user is not None:
@@ -120,6 +121,15 @@ async def root(
 async def root(request: Request):
     return templates.TemplateResponse("login.html",
                                       {"request": request})
+
+@app.get("/certificates")
+async def root(request: Request, 
+               user: User = Depends(current_active_verified_user),
+               session: AsyncSession = Depends(get_async_session)):
+    certificates = await get_all_certificates(session=session)
+    return templates.TemplateResponse("certificates.html",
+                                      {"request": request,
+                                       "certificates": certificates})
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):
