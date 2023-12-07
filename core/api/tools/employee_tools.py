@@ -11,7 +11,7 @@ from core.api.tools.exam_tools import get_all_exams_by_id
 from typing import Any
 
 
-async def get_all_employees(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema]:
+async def get_all_employees_from_bd(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -30,7 +30,7 @@ async def get_all_employees(session: AsyncSession, skip: int, limit: int, subdiv
             result.append(res)
     return result
 
-async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema_v2]:
+async def get_all_employees_from_bd_v2(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema_v2]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -62,7 +62,7 @@ async def get_all_employees_v2(session: AsyncSession, skip: int, limit: int, sub
             result.append(res)
     return result
 
-async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: int, division: int | None) -> list[EmployeeSchemWithExams]:
+async def get_all_employees_with_exams_from_bd(session: AsyncSession, skip: int, limit: int, division: int | None) -> list[EmployeeSchemWithExams]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).order_by(Employee.FIO).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -96,7 +96,7 @@ async def get_all_employees_with_exams(session: AsyncSession, skip: int, limit: 
             result.append(res)
     return result
 
-async def get_employee(session: AsyncSession, name: str | None, id: int | None) -> EmployeeSchema:
+async def get_employee_from_bd(session: AsyncSession, name: str | None, id: int | None) -> EmployeeSchema:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).where(or_(Employee.FIO == name, Employee.id == id))
     res: Result = await session.execute(stmt)
     employee: Employee = res.scalar_one_or_none()
@@ -114,7 +114,7 @@ async def get_employee(session: AsyncSession, name: str | None, id: int | None) 
         return None
 
 
-async def add_employee(session: AsyncSession, new_employee: CreateEmployee):
+async def add_employee_in_bd(session: AsyncSession, new_employee: CreateEmployee):
     employee = Employee()
     employee.FIO = new_employee.fio
     employee.subdivision_id = new_employee.subdivision_id
@@ -126,12 +126,12 @@ async def add_employee(session: AsyncSession, new_employee: CreateEmployee):
     return employee
 
 
-async def del_employee(employee: Employee, session: AsyncSession):
+async def del_employee_from_bd(employee: Employee, session: AsyncSession):
     stmt = delete(Employee).where(Employee.id == employee.id)
     await session.execute(stmt)
     await session.commit()
     
-async def update_employee(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate):
+async def update_employee_in_bd(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate):
     # for name, value in employee_update.model_dump(exclude_unset=True).items():
     #     setattr(employee, name, value)
     try:
