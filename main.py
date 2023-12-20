@@ -7,14 +7,15 @@ import os
 from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.schemas.employee import EmployeeSchema_v2
-from core.api.schemas.position import PositionSchema
+from core.api.schemas.position import PositionRespone
 
 from core.api.routers import employee
 from core.api.routers import exam_types
 from core.api.routers import divisions
 from core.api.routers import subdivision
+from core.api.routers import positions
 
-from core.api.tools.position_tools import get_all_positions
+from core.api.tools.position_tools import get_all_positions_from_bd
 from core.api.tools.certificates_tool import get_all_certificates
 from core.api.tools.exam_type_tools import get_all_exam_types_from_bd
 from fastapi.middleware.cors import CORSMiddleware
@@ -72,6 +73,7 @@ app.include_router(employee.router)
 app.include_router(exam_types.router)
 app.include_router(divisions.router)
 app.include_router(subdivision.router)
+app.include_router(positions.router)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend, requires_verification=True),
@@ -109,7 +111,7 @@ async def root(
 ):  
     if user is not None:
         employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_bd_v2(session=session, skip=0, limit=10, subdivision=division)
-        positions: list[PositionSchema] = await get_all_positions(session=session)
+        positions: list[PositionRespone] = await get_all_positions_from_bd(session=session)
         return templates.TemplateResponse("index.html",
                                             {"request": request,
                                             "employees": employees,
@@ -139,10 +141,18 @@ async def get_exam_types_page(request: Request,
                user: User = Depends(current_active_verified_user),
                session: AsyncSession = Depends(get_async_session)):
     exam_types = await get_all_exam_types_from_bd(session)
-    print(exam_types)
     return templates.TemplateResponse("exam-types.html",
                                       {"request": request,
                                        "exam_types": exam_types})
+
+@app.get("/positions")
+async def get_positions_page(request: Request, 
+               user: User = Depends(current_active_verified_user),
+               session: AsyncSession = Depends(get_async_session)):
+    positions = await get_all_positions_from_bd(session)
+    return templates.TemplateResponse("positions.html",
+                                      {"request": request,
+                                       "positions": positions})
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):
