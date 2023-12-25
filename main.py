@@ -18,6 +18,7 @@ from core.api.routers import positions
 from core.api.tools.position_tools import get_all_positions_from_bd
 from core.api.tools.certificates_tool import get_all_certificates
 from core.api.tools.exam_type_tools import get_all_exam_types_from_bd
+from core.api.tools.division_tools import get_all_divisions_with_subdivision_from_db
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
@@ -153,6 +154,15 @@ async def get_positions_page(request: Request,
     return templates.TemplateResponse("positions.html",
                                       {"request": request,
                                        "positions": positions})
+
+@app.get("/divisions-page")
+async def get_positions_page(request: Request, 
+               user: User = Depends(current_active_verified_user),
+               session: AsyncSession = Depends(get_async_session)):
+    divisions = await get_all_divisions_with_subdivision_from_db(session)
+    return templates.TemplateResponse("divisions.html",
+                                      {"request": request,
+                                       "divisions": divisions})
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):

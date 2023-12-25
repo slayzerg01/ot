@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from .subdivision import SubdivisionBase
 
 
 class DivisionBase(BaseModel):
@@ -7,3 +8,6 @@ class DivisionBase(BaseModel):
 
 class DivisionResponse(DivisionBase):
     id: int
+
+class DivisionWithSubdivisions(DivisionResponse):
+    subdivisions: list[SubdivisionBase]
