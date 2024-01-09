@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from typing import Dict
 
 
 class SubdivisionBase(BaseModel):
@@ -9,3 +10,7 @@ class SubdivisionBase(BaseModel):
 class SubdivisionResponse(SubdivisionBase):
     division_id: int
     division: str
+
+class UpdateSubdivision(BaseModel):
+    division_id: int
+    subdivisions: Dict[str, str]
