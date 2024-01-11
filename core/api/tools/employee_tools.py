@@ -9,6 +9,7 @@ from core.api.schemas.exams import ExamResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.tools.exam_tools import get_all_exams_by_id
 from typing import Any
+import datetime
 
 
 async def get_all_employees_from_bd(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema]:
@@ -94,6 +95,7 @@ async def get_all_employees_with_exams_from_bd(session: AsyncSession, skip: int,
                 exams = exams_by_id
             )
             result.append(res)
+    result.sort(key=lambda x: x.exams[0].next_date - datetime.date.today() if x.exams else datetime.timedelta(days=100000), reverse=False)        
     return result
 
 async def get_employee_from_bd(session: AsyncSession, name: str | None, id: int | None) -> EmployeeSchema:

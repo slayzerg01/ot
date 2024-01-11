@@ -16,6 +16,8 @@ asyncpg = "^0.29.0"
 black = "^23.11.0"
 gunicorn = "^21.2.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
+faker = "^22.1.0"
+psycopg2 = "^2.9.9"
 
 
 [build-system]
