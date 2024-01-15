@@ -8,12 +8,14 @@ from core.models.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.schemas.employee import EmployeeSchema_v2
 from core.api.schemas.position import PositionRespone
+from core.api.schemas.exam_types import ExamTypeResponse
 
 from core.api.routers import employee
 from core.api.routers import exam_types
 from core.api.routers import divisions
 from core.api.routers import subdivision
 from core.api.routers import positions
+from core.api.routers import exams
 
 from core.api.tools.position_tools import get_all_positions_from_bd
 from core.api.tools.certificates_tool import get_all_certificates
@@ -75,6 +77,7 @@ app.include_router(exam_types.router)
 app.include_router(divisions.router)
 app.include_router(subdivision.router)
 app.include_router(positions.router)
+app.include_router(exams.router)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend, requires_verification=True),
@@ -113,10 +116,12 @@ async def root(
     if user is not None:
         employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_bd_v2(session=session, skip=0, limit=10, subdivision=division)
         positions: list[PositionRespone] = await get_all_positions_from_bd(session=session)
+        examTypes: list[ExamTypeResponse] = await get_all_exam_types_from_bd(session=session)
         return templates.TemplateResponse("index.html",
                                             {"request": request,
                                             "employees": employees,
-                                            "positions": positions})
+                                            "positions": positions,
+                                            "examTypes": examTypes})
     else:
         return RedirectResponse(url="/login")
 
