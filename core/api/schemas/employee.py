@@ -29,6 +29,7 @@ class EmployeeUpdate(EmployeeBase):
     position_id: int | None = None
     subdivision_id: int | None = None
     is_active: bool | None = None
+    certificate_id: int | None = None
 
 class CreateEmployee(EmployeeBase):
     is_active: bool

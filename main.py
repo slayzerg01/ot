@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.schemas.employee import EmployeeSchema_v2
 from core.api.schemas.position import PositionRespone
 from core.api.schemas.exam_types import ExamTypeResponse
+from core.api.schemas.subdivision import SubdivisionResponse
 
 from core.api.routers import employee
 from core.api.routers import exam_types
@@ -21,6 +22,7 @@ from core.api.tools.position_tools import get_all_positions_from_bd
 from core.api.tools.certificates_tool import get_all_certificates
 from core.api.tools.exam_type_tools import get_all_exam_types_from_bd
 from core.api.tools.division_tools import get_all_divisions_with_subdivision_from_db
+from core.api.tools.subdivision_tools import get_all_subdivisions_from_db
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
@@ -117,11 +119,13 @@ async def root(
         employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_bd_v2(session=session, skip=0, limit=10, subdivision=division)
         positions: list[PositionRespone] = await get_all_positions_from_bd(session=session)
         examTypes: list[ExamTypeResponse] = await get_all_exam_types_from_bd(session=session)
+        subdivisons: list[SubdivisionResponse] = await get_all_subdivisions_from_db(session=session)
         return templates.TemplateResponse("index.html",
                                             {"request": request,
                                             "employees": employees,
                                             "positions": positions,
-                                            "examTypes": examTypes})
+                                            "examTypes": examTypes,
+                                            "subdivisons": subdivisons})
     else:
         return RedirectResponse(url="/login")
 

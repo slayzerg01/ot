@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_
 from sqlalchemy.orm import joinedload
-from core.models.exam import Exam
+from core.models.exam import Exam, ExamType
 from sqlalchemy.engine import Result
 from core.api.schemas.exams import ExamResponse, ExamCreate, ExamResponseWithEmployee, ExamCreated
 import datetime
@@ -54,8 +54,11 @@ async def add_exam_in_db(employee_id: int, new_exam: ExamCreate,session: AsyncSe
     exam = Exam()
     exam.exam_type_id = new_exam.exam_type_id
     exam.date = new_exam.date
+    stmt = select(ExamType).where(ExamType.id == new_exam.exam_type_id)
+    res: Result = await session.execute(stmt)
+    exam_type: ExamType = res.scalar_one()
     if len(new_exam.next_date) == 0:
-        exam.next_date = new_exam.date + datetime.timedelta(days=365)
+        exam.next_date = new_exam.date + datetime.timedelta(days=exam_type.period)
     else:
         exam.next_date = datetime.datetime.strptime(new_exam.next_date, "%Y-%m-%d") 
     exam.employee_id = employee_id

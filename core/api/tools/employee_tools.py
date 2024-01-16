@@ -134,19 +134,24 @@ async def del_employee_from_bd(employee: Employee, session: AsyncSession):
     await session.commit()
     
 async def update_employee_in_bd(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate):
-    # for name, value in employee_update.model_dump(exclude_unset=True).items():
-    #     setattr(employee, name, value)
     try:
         update_data = employee_update.model_dump(exclude_unset=True)
         if 'fio' in update_data:
             update_data['FIO'] = update_data.pop('fio')
+        if employee_update.certificate_id is not None:
+            update_data.pop('certificate_id')
+            stmt = update(Certificate).where(Certificate.employee_id == employee.id).values(employee_id = None)
+            await session.execute(stmt)
+            stmt = update(Certificate).where(Certificate.number == employee_update.certificate_id).values(employee_id = employee.id)
+            await session.execute(stmt)
         id = employee.id
         stmt = update(Employee).where(Employee.id == employee.id).values(update_data)
         await session.execute(stmt)
-        await session.commit()
         stmt = select(Employee).where(Employee.id == id)
         res: Result = await session.execute(stmt)
         employee: Employee = res.scalar_one_or_none()
+        
+        await session.commit()     
         return employee
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))
