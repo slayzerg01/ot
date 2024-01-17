@@ -133,7 +133,7 @@ async def del_employee_from_bd(employee: Employee, session: AsyncSession):
     await session.execute(stmt)
     await session.commit()
     
-async def update_employee_in_bd(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate):
+async def update_employee_in_bd(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate) -> EmployeeSchema_v2:
     try:
         update_data = employee_update.model_dump(exclude_unset=True)
         if 'fio' in update_data:
@@ -147,11 +147,25 @@ async def update_employee_in_bd(session: AsyncSession, employee: Employee, emplo
         id = employee.id
         stmt = update(Employee).where(Employee.id == employee.id).values(update_data)
         await session.execute(stmt)
-        stmt = select(Employee).where(Employee.id == id)
+        stmt = select(Employee).where(Employee.id == id).options(joinedload(Employee.position), joinedload(Employee.subdivision))
         res: Result = await session.execute(stmt)
         employee: Employee = res.scalar_one_or_none()
-        
-        await session.commit()     
-        return employee
+        stmt = select(Division).where(Division.id == employee.subdivision.division_id)
+        res: Result = await session.execute(stmt)
+        division: Division = res.scalar_one_or_none()
+        await session.commit()   
+
+        response: EmployeeSchema_v2 = EmployeeSchema_v2(
+            fio=employee.FIO,
+            position_id=employee.position_id,
+            subdivision_id=employee.subdivision_id,
+            id= employee.id,
+            position=employee.position.name,
+            subdivision=employee.subdivision.name,
+            division=division.name,
+            certificate=employee_update.certificate_id
+        )
+
+        return response
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))
