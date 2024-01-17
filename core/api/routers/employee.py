@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.models.database import get_async_session
 from core.models.employee import Employee
 from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, EmployeeBase, CreateEmployee, EmployeeSchemWithExams
-from core.api.tools.employee_tools import get_all_employees_from_bd, get_employee_from_bd, add_employee_in_bd, del_employee_from_bd, update_employee_in_bd, get_all_employees_from_bd_v2, get_all_employees_with_exams_from_bd
+from core.api.tools.employee_tools import get_all_employees_from_bd, get_employee_from_bd, add_employee_in_bd, del_employee_from_bd, update_employee_in_bd, get_all_employees_from_bd_v2, get_all_employees_with_exams_from_db
 from core.api.tools.dependencies import employee_by_id
 from sqlalchemy.exc import IntegrityError
 
@@ -14,7 +14,7 @@ router = APIRouter(
 
 @router.get("/get_all_with_exams", summary="get all employees with exams")
 async def read_employees_with_exams(division: int = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchemWithExams]: 
-    return await get_all_employees_with_exams_from_bd(session, skip, limit, division)
+    return await get_all_employees_with_exams_from_db(session, skip, limit, division)
 
 @router.get("/", summary="get all employees")
 async def read_employees(subdivision: str = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchema]: 
