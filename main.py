@@ -1,5 +1,6 @@
-from fastapi import FastAPI, Depends, Request, HTTPException, status
-from fastapi.responses import RedirectResponse
+from pathlib import Path
+from fastapi import FastAPI, Depends, Header, Request, HTTPException, Response, status
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse, StreamingResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 import os
@@ -187,6 +188,38 @@ async def get_positions_page(request: Request,
                                        "exams": exams,
                                        "page": page,
                                        "max_page": max_page})
+
+files = {
+    item: os.path.join('static/video', item)
+    for item in os.listdir('static/video')
+}
+
+
+@app.get("/get_video/{video_name}")
+async def video_endpoint(video_name: str, range: str = Header(None)):
+    CHUNK_SIZE = 1024*1024
+    video_path = Path(files.get(video_name))
+    start, end = range.replace("bytes=", "").split("-")
+    start = int(start)
+    end = int(end) if end else start + CHUNK_SIZE
+    with open(video_path, "rb") as video:
+        video.seek(start)
+        data = video.read(end - start)
+        filesize = str(video_path.stat().st_size)
+        headers = {
+            'Content-Range': f'bytes {str(start)}-{str(end)}/{filesize}',
+            'Accept-Ranges': 'bytes'
+        }
+        return Response(data, status_code=206, headers=headers, media_type="video/mp4")
+
+@app.get('/play_video/{video_name}')
+async def play_video(video_name: str, request: Request, response_class=HTMLResponse):
+    video_path = files.get(video_name)
+    if video_path:
+        return templates.TemplateResponse(
+            'video.html', {'request': request, 'video': {'path': video_path, 'name': video_name}})
+    else:
+        return Response(status_code=404)
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):
