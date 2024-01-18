@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.models.database import get_async_session
-from core.api.schemas.exams import ExamResponse, ExamResponseWithEmployee, ExamCreate
-from core.api.tools.exam_tools import get_all_exams_from_db, add_exam_in_db
+from core.api.schemas.exams import ExamResponse, ExamResponseWithEmployee, ExamCreate, ExamUpdate
+from core.api.tools.exam_tools import get_all_exams_from_db, add_exam_in_db, update_exam_in_db, del_exam_in_db
 
 router = APIRouter(
     prefix="/exams",
@@ -16,3 +16,11 @@ async def get_all_exams(skip: int = 0, limit: int = 10, session: AsyncSession = 
 @router.post("/add")
 async def add_exam(employee_id: int, exam: ExamCreate, session: AsyncSession = Depends(get_async_session)):
     return await add_exam_in_db(employee_id=employee_id, new_exam=exam, session=session)
+
+@router.patch("/update")
+async def add_exam(exam_id: int, exam: ExamUpdate, session: AsyncSession = Depends(get_async_session)):
+    return await update_exam_in_db(exam_id=exam_id, exam_update=exam, session=session)
+
+@router.delete("/del")
+async def add_exam(exam_id: int, session: AsyncSession = Depends(get_async_session)):
+    return await del_exam_in_db(exam_id=exam_id, session=session)

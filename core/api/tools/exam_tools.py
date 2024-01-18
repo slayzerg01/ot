@@ -1,10 +1,12 @@
+from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, update, delete
 from sqlalchemy.orm import joinedload
 from core.models.exam import Exam, ExamType
 from sqlalchemy.engine import Result
-from core.api.schemas.exams import ExamResponse, ExamCreate, ExamResponseWithEmployee, ExamCreated
+from core.api.schemas.exams import ExamResponse, ExamCreate, ExamResponseWithEmployee, ExamCreated, ExamUpdate
 import datetime
+import math
 
 async def get_all_exams_by_id(session: AsyncSession, skip: int | None, limit: int | None, id: int) -> list[ExamResponse]:
     stmt = select(Exam).options(joinedload(Exam.exam_type)).where(Exam.employee_id == id).order_by(Exam.next_date.desc()).offset(skip).limit(limit)
@@ -29,7 +31,7 @@ async def get_all_exams_by_id(session: AsyncSession, skip: int | None, limit: in
     return result
 
 async def get_all_exams_from_db(skip: int, limit: int, session: AsyncSession) -> list[ExamResponseWithEmployee]:
-    stmt = select(Exam).options(joinedload(Exam.exam_type), joinedload(Exam.employee)).offset(skip).limit(limit)
+    stmt = select(Exam).options(joinedload(Exam.exam_type), joinedload(Exam.employee)).order_by(Exam.date.desc()).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     exams: list[Exam] = res.scalars().all()
     result = []
@@ -48,6 +50,13 @@ async def get_all_exams_from_db(skip: int, limit: int, session: AsyncSession) ->
             employee_id=exam.employee_id
         )
         result.append(res)
+    return result
+
+async def get_max_pages(skip: int, session: AsyncSession) -> list[ExamResponseWithEmployee]:
+    stmt = select(Exam)
+    res: Result = await session.execute(stmt)
+    exams: list[Exam] = res.scalars().all()
+    result = math.ceil(len(exams) / skip)
     return result
 
 async def add_exam_in_db(employee_id: int, new_exam: ExamCreate,session: AsyncSession):
@@ -82,3 +91,22 @@ async def add_exam_in_db(employee_id: int, new_exam: ExamCreate,session: AsyncSe
             place=exam.place,
             employee_id=exam.employee_id
         )
+
+async def update_exam_in_db(session: AsyncSession, exam_id: int, exam_update: ExamUpdate):
+    try:
+        update_data = exam_update.model_dump(exclude_unset=True)
+        stmt = update(Exam).where(Exam.id == exam_id).values(update_data)
+        await session.execute(stmt)
+        await session.commit()
+        stmt = select(Exam).options(joinedload(Exam.exam_type)).where(Exam.id == exam_id)
+        res: Result = await session.execute(stmt)
+        exam: Exam = res.scalar_one_or_none()
+        return exam
+    except Exception as ex:
+        raise HTTPException(status_code=400, detail=str(ex))
+
+async def del_exam_in_db(session: AsyncSession, exam_id: int):
+    stmt = delete(Exam).where(Exam.id == exam_id)
+    await session.execute(stmt)
+    await session.commit()
+    return {'detail': 'success'}

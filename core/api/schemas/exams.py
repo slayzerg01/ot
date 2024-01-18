@@ -18,9 +18,14 @@ class ExamResponseWithEmployee(ExamBase):
     id: int
     employee_id: int
     employee: str
+    exam_name: str
 
 class ExamCreate(ExamBase):
     next_date: str | None
+    notation: str | None
+
+class ExamUpdate(ExamBase):
+    next_date: py_date | None
     notation: str | None
 
 class ExamCreated(ExamResponse):

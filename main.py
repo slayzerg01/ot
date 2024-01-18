@@ -23,6 +23,7 @@ from core.api.tools.certificates_tool import get_all_certificates
 from core.api.tools.exam_type_tools import get_all_exam_types_from_bd
 from core.api.tools.division_tools import get_all_divisions_with_subdivision_from_db
 from core.api.tools.subdivision_tools import get_all_subdivisions_from_db
+from core.api.tools.exam_tools import get_all_exams_from_db, get_max_pages
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
@@ -172,6 +173,20 @@ async def get_positions_page(request: Request,
     return templates.TemplateResponse("divisions.html",
                                       {"request": request,
                                        "divisions": divisions})
+
+@app.get("/exams-list")
+async def get_positions_page(request: Request, 
+                             page: int = 1,
+                             user: User = Depends(current_active_verified_user),
+                             session: AsyncSession = Depends(get_async_session)):
+    tmp = 20
+    exams = await get_all_exams_from_db(skip=page*tmp-tmp, limit=tmp, session=session)
+    max_page = await get_max_pages(skip=tmp, session=session)
+    return templates.TemplateResponse("exam-list.html",
+                                      {"request": request,
+                                       "exams": exams,
+                                       "page": page,
+                                       "max_page": max_page})
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):
