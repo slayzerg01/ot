@@ -1,18 +1,19 @@
-"""пришлось с начала алембик инициализировать
+"""initial
 
-Revision ID: c0e02236f666
+Revision ID: c307b531fd6a
 Revises: 
-Create Date: 2023-11-17 15:02:53.212876
+Create Date: 2024-01-28 17:46:18.477188
 
 """
 from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+import fastapi_users_db_sqlalchemy
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c0e02236f666'
+revision: str = 'c307b531fd6a'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -49,6 +50,16 @@ def upgrade() -> None:
     sa.UniqueConstraint('id'),
     sa.UniqueConstraint('name')
     )
+    op.create_table('user',
+    sa.Column('id', fastapi_users_db_sqlalchemy.generics.GUID(), nullable=False),
+    sa.Column('email', sa.String(length=320), nullable=False),
+    sa.Column('hashed_password', sa.String(length=1024), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('is_superuser', sa.Boolean(), nullable=False),
+    sa.Column('is_verified', sa.Boolean(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_table('subdivisions',
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('division_id', sa.Integer(), nullable=False),
@@ -89,6 +100,8 @@ def upgrade() -> None:
     sa.Column('date', sa.DATE(), nullable=False),
     sa.Column('next_date', sa.DATE(), nullable=False),
     sa.Column('protocol', sa.String(length=255), nullable=False),
+    sa.Column('notation', sa.String(length=500), nullable=True),
+    sa.Column('place', sa.String(length=50), nullable=True),
     sa.Column('employee_id', sa.Integer(), nullable=False),
     sa.Column('exam_type_id', sa.Integer(), nullable=False),
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -108,6 +121,8 @@ def downgrade() -> None:
     op.drop_table('certificates')
     op.drop_table('employees')
     op.drop_table('subdivisions')
+    op.drop_index(op.f('ix_user_email'), table_name='user')
+    op.drop_table('user')
     op.drop_table('positions')
     op.drop_table('examtypes')
     op.drop_table('divisions')

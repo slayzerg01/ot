@@ -32,5 +32,4 @@ class EmployeeUpdate(EmployeeBase):
     certificate_id: int | None = None
 
 class CreateEmployee(EmployeeBase):
-    is_active: bool
-    pass
+    certificate: int | None = None

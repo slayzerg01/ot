@@ -7,7 +7,7 @@ __all__ = (
     "Certificate",
     "ExamType",
     "Exam",
-    "User"
+    "User",
 )
 
 from .database import Base, BaseModel

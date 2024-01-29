@@ -18,6 +18,7 @@ from core.api.routers import divisions
 from core.api.routers import subdivision
 from core.api.routers import positions
 from core.api.routers import exams
+from core.api.routers import file
 
 from core.api.tools.position_tools import get_all_positions_from_bd
 from core.api.tools.certificates_tool import get_all_certificates
@@ -82,6 +83,7 @@ app.include_router(divisions.router)
 app.include_router(subdivision.router)
 app.include_router(positions.router)
 app.include_router(exams.router)
+app.include_router(file.router)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend, requires_verification=True),

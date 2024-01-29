@@ -117,15 +117,25 @@ async def get_employee_from_bd(session: AsyncSession, name: str | None, id: int 
 
 
 async def add_employee_in_bd(session: AsyncSession, new_employee: CreateEmployee):
-    employee = Employee()
-    employee.FIO = new_employee.fio
-    employee.subdivision_id = new_employee.subdivision_id
-    employee.position_id = new_employee.position_id
-    employee.is_active = new_employee.is_active
-    session.add(employee)
-    await session.commit()
-    await session.refresh(employee)
-    return employee
+    stmt = select(Certificate).where(Certificate.number == new_employee.certificate)
+    res = await session.execute(stmt)
+    certificate = res.scalar_one_or_none()
+    if certificate.employee_id:
+        return {'code': 1,
+                'detail':'номер удостоверения уже используется, выберите другое значение'}
+    else:
+        employee = Employee()
+        employee.FIO = new_employee.fio
+        employee.subdivision_id = new_employee.subdivision_id
+        employee.position_id = new_employee.position_id
+        employee.is_active = True
+        session.add(employee)
+        await session.commit()
+        await session.refresh(employee)
+        stmt = update(Certificate).where(Certificate.number == new_employee.certificate).values(employee_id = employee.id)
+        await session.execute(stmt)
+        await session.commit()
+        return employee
 
 
 async def del_employee_from_bd(employee: Employee, session: AsyncSession):

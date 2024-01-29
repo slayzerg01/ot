@@ -33,6 +33,7 @@ async def add_employee(new_employee: CreateEmployee, session: AsyncSession = Dep
     - **name**: each employee must have a name
     - **subdivision**: subdivision id 
     - **position**: position id 
+    - **certificate**: certificate number
     """
     if await get_employee_from_bd(session=session, name=new_employee.fio, id=None):
         raise HTTPException(status_code=404, detail="Employee already exist")
