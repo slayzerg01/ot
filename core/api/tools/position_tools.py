@@ -5,7 +5,7 @@ from core.api.schemas.position import PositionRespone, UpdatePosition, CreatePos
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
 
-async def get_all_positions_from_bd(session: AsyncSession) -> list[PositionRespone]:
+async def get_all_positions_from_db(session: AsyncSession) -> list[PositionRespone]:
     stmt = select(Position)
     res: Result = await session.execute(stmt)
     positions: list[Position] = res.scalars().all()
@@ -19,7 +19,7 @@ async def get_all_positions_from_bd(session: AsyncSession) -> list[PositionRespo
         result.append(res)
     return result
 
-async def get_position_from_bd(session: AsyncSession, id: int) -> PositionRespone:
+async def get_position_by_id_from_db(session: AsyncSession, id: int) -> PositionRespone:
     stmt = select(Position).where(Position.id == id)
     res: Result = await session.execute(stmt)
     position: Position = res.scalar_one_or_none()
@@ -32,7 +32,7 @@ async def get_position_from_bd(session: AsyncSession, id: int) -> PositionRespon
     else:
         return None
 
-async def update_position_in_bd(session: AsyncSession, position: Position, position_update: UpdatePosition):
+async def update_position_in_db(session: AsyncSession, position: Position, position_update: UpdatePosition):
     try:
         update_data = position_update.model_dump(exclude_unset=True)
         stmt = update(Position).where(Position.id == position.id).values(update_data)
@@ -45,7 +45,7 @@ async def update_position_in_bd(session: AsyncSession, position: Position, posit
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))
 
-async def add_position_in_bd(session: AsyncSession, new_position: CreatePosition):
+async def add_position_in_db(session: AsyncSession, new_position: CreatePosition):
     position = Position()
     position.name = new_position.name
     session.add(position)

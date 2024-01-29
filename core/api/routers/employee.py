@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.models.database import get_async_session
 from core.models.employee import Employee
 from core.api.schemas.employee import EmployeeSchema, EmployeeUpdate, EmployeeBase, CreateEmployee, EmployeeSchemWithExams
-from core.api.tools.employee_tools import get_all_employees_from_bd, get_employee_from_bd, add_employee_in_bd, del_employee_from_bd, update_employee_in_bd, get_all_employees_from_bd_v2, get_all_employees_with_exams_from_db
+from core.api.tools.employee_tools import get_all_employees_from_db, get_employee_from_db, add_employee_in_db, del_employee_from_db, update_employee_in_db, get_all_employees_from_db_v2, get_all_employees_with_exams_from_db
 from core.api.tools.dependencies import employee_by_id
 from sqlalchemy.exc import IntegrityError
 
@@ -24,7 +24,7 @@ async def read_employees(subdivision: str = None, skip: int = 0, limit: int = 10
     - **skip**: offset of the array
     - **limit**: max count employees in result array
     """
-    return await get_all_employees_from_bd(session, skip, limit, subdivision)
+    return await get_all_employees_from_db(session, skip, limit, subdivision)
 
 @router.post("/add", summary="add employee")
 async def add_employee(new_employee: CreateEmployee, session: AsyncSession = Depends(get_async_session)):
@@ -35,18 +35,18 @@ async def add_employee(new_employee: CreateEmployee, session: AsyncSession = Dep
     - **position**: position id 
     - **certificate**: certificate number
     """
-    if await get_employee_from_bd(session=session, name=new_employee.fio, id=None):
+    if await get_employee_from_db(session=session, name=new_employee.fio, id=None):
         raise HTTPException(status_code=404, detail="Employee already exist")
     else:
         try:
-            employee = await add_employee_in_bd(session=session, new_employee=new_employee)
+            employee = await add_employee_in_db(session=session, new_employee=new_employee)
             return employee
         except IntegrityError as ex:
             raise HTTPException(status_code=400, detail=str(ex))
     
 @router.delete("/del/{employee_id}/", summary="delete employee")
 async def del_employee(employee: Employee = Depends(employee_by_id), session: AsyncSession = Depends(get_async_session)):
-    await del_employee_from_bd(employee, session)
+    await del_employee_from_db(employee, session)
     return [{"detail": f"{employee.fio} was deleted"}]
 
 @router.get("/get/{employee_id}/", summary="get employee")
@@ -57,7 +57,7 @@ async def get_employees(employee: Employee = Depends(employee_by_id)) -> Employe
 async def update_employee(employee_update: EmployeeUpdate, 
                           employee: Employee = Depends(employee_by_id), 
                           session: AsyncSession = Depends(get_async_session)):
-    return await update_employee_in_bd(
+    return await update_employee_in_db(
         session = session,
         employee = employee,
         employee_update = employee_update

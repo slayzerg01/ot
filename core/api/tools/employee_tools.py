@@ -12,7 +12,7 @@ from typing import Any
 import datetime
 
 
-async def get_all_employees_from_bd(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema]:
+async def get_all_employees_from_db(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -31,7 +31,7 @@ async def get_all_employees_from_bd(session: AsyncSession, skip: int, limit: int
             result.append(res)
     return result
 
-async def get_all_employees_from_bd_v2(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema_v2]:
+async def get_all_employees_from_db_v2(session: AsyncSession, skip: int, limit: int, subdivision: str | None) -> list[EmployeeSchema_v2]:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).offset(skip).limit(limit)
     res: Result = await session.execute(stmt)
     employees: list[Employee] = res.scalars().all()
@@ -98,7 +98,7 @@ async def get_all_employees_with_exams_from_db(session: AsyncSession, skip: int,
     result.sort(key=lambda x: x.exams[0].next_date - datetime.date.today() if x.exams else datetime.timedelta(days=100000), reverse=False)        
     return result
 
-async def get_employee_from_bd(session: AsyncSession, name: str | None, id: int | None) -> EmployeeSchema:
+async def get_employee_from_db(session: AsyncSession, name: str | None, id: int | None) -> EmployeeSchema:
     stmt = select(Employee).options(joinedload(Employee.subdivision), joinedload(Employee.position)).where(or_(Employee.FIO == name, Employee.id == id))
     res: Result = await session.execute(stmt)
     employee: Employee = res.scalar_one_or_none()
@@ -116,7 +116,7 @@ async def get_employee_from_bd(session: AsyncSession, name: str | None, id: int 
         return None
 
 
-async def add_employee_in_bd(session: AsyncSession, new_employee: CreateEmployee):
+async def add_employee_in_db(session: AsyncSession, new_employee: CreateEmployee):
     stmt = select(Certificate).where(Certificate.number == new_employee.certificate)
     res = await session.execute(stmt)
     certificate = res.scalar_one_or_none()
@@ -138,12 +138,12 @@ async def add_employee_in_bd(session: AsyncSession, new_employee: CreateEmployee
         return employee
 
 
-async def del_employee_from_bd(employee: Employee, session: AsyncSession):
+async def del_employee_from_db(employee: Employee, session: AsyncSession):
     stmt = delete(Employee).where(Employee.id == employee.id)
     await session.execute(stmt)
     await session.commit()
     
-async def update_employee_in_bd(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate) -> EmployeeSchema_v2:
+async def update_employee_in_db(session: AsyncSession, employee: Employee, employee_update: EmployeeUpdate) -> EmployeeSchema_v2:
     try:
         update_data = employee_update.model_dump(exclude_unset=True)
         if 'fio' in update_data:
@@ -179,3 +179,12 @@ async def update_employee_in_bd(session: AsyncSession, employee: Employee, emplo
         return response
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))
+
+async def add_import_employee(fio: str, position_id: int, subdivision_id: int, session: AsyncSession):
+    employee = Employee()
+    employee.FIO = fio
+    employee.subdivision_id = subdivision_id
+    employee.position_id = position_id
+    employee.is_active = True
+    session.add(employee)
+    await session.commit()

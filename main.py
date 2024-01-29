@@ -20,7 +20,7 @@ from core.api.routers import positions
 from core.api.routers import exams
 from core.api.routers import file
 
-from core.api.tools.position_tools import get_all_positions_from_bd
+from core.api.tools.position_tools import get_all_positions_from_db
 from core.api.tools.certificates_tool import get_all_certificates
 from core.api.tools.exam_type_tools import get_all_exam_types_from_bd
 from core.api.tools.division_tools import get_all_divisions_with_subdivision_from_db
@@ -120,8 +120,8 @@ async def root(
     session: AsyncSession = Depends(get_async_session)
 ):  
     if user is not None:
-        employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_bd_v2(session=session, skip=0, limit=10, subdivision=division)
-        positions: list[PositionRespone] = await get_all_positions_from_bd(session=session)
+        employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_db_v2(session=session, skip=0, limit=10, subdivision=division)
+        positions: list[PositionRespone] = await get_all_positions_from_db(session=session)
         examTypes: list[ExamTypeResponse] = await get_all_exam_types_from_bd(session=session)
         subdivisons: list[SubdivisionResponse] = await get_all_subdivisions_from_db(session=session)
         return templates.TemplateResponse("index.html",
@@ -163,7 +163,7 @@ async def get_exam_types_page(request: Request,
 async def get_positions_page(request: Request, 
                user: User = Depends(current_active_verified_user),
                session: AsyncSession = Depends(get_async_session)):
-    positions = await get_all_positions_from_bd(session)
+    positions = await get_all_positions_from_db(session)
     return templates.TemplateResponse("positions.html",
                                       {"request": request,
                                        "positions": positions})
