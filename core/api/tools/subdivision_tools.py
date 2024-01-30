@@ -31,8 +31,6 @@ async def update_subdivision(new_subdivision: Subdivision, session: AsyncSession
     await session.commit()
 
 async def add_subdivision(new_subdivision: Subdivision, division_id: int, session: AsyncSession):
-    print("update")
-    print(new_subdivision)
     subdivision = Subdivision()
     subdivision.name = new_subdivision.name
     subdivision.division_id = division_id
@@ -53,4 +51,10 @@ async def update_and_add_subdivisions_in_db(subdivisions: UpdateSubdivision, ses
             await update_subdivision(subdivision, session)
         else:
             await add_subdivision(subdivision, division_id, session)
-        
+
+async def delete_subdivision_from_db(subdivision_id: int, session: AsyncSession):
+    print(subdivision_id)
+    stmt = delete(Subdivision).where(Subdivision.id == subdivision_id)
+    await session.execute(stmt)
+    await session.commit()
+    

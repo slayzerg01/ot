@@ -1,14 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile
 from openpyxl import load_workbook
 import io
-from core.api.schemas.subdivision import SubdivisionResponse
+from core.api.schemas.subdivision import SubdivisionBase, SubdivisionResponse
 from core.api.schemas.position import PositionRespone
-from core.api.tools.subdivision_tools import get_all_subdivisions_from_db
+from core.api.tools.subdivision_tools import get_all_subdivisions_from_db, add_subdivision
 from core.models.database import get_async_session
-from core.api.tools.position_tools import get_all_positions_from_db
+from core.api.tools.position_tools import get_all_positions_from_db, add_position_in_db
 from core.api.tools.employee_tools import add_import_employee
+from core.api.tools.division_tools import get_all_divisions_from_db
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.tools.employee_tools import get_employee_from_db
+from core.api.schemas.position import CreatePosition
+from core.models.employee import Subdivision
 import sys
 
 router = APIRouter(
@@ -38,7 +41,7 @@ async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_asyn
             i += 1
         if i == 2:
             raise CustomException("Excel файл пустой")
-        subdivisions: list[SubdivisionResponse] = await get_all_subdivisions_from_db(session=session)
+        subdivisions: list[SubdivisionBase] = await get_all_subdivisions_from_db(session=session)
         positions: list[PositionRespone] = await get_all_positions_from_db(session=session)
         for employee in employee_list:
             for sub in subdivisions:
@@ -49,6 +52,12 @@ async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_asyn
                 if employee.position[0] == pos.name:
                     employee.position[1] = pos.id
                     break
+            if not employee.position[1]:
+                new_position = await add_position_in_db(new_position=CreatePosition(name=employee.position[0]), session=session)
+                positions.append(PositionRespone(name=new_position.name, id=new_position.id))
+                employee.position[1] = new_position.id
+            
+                
             employee_tmp = await get_employee_from_db(session=session, name=employee.fio, id=None)
             if not employee_tmp:
                 await add_import_employee(fio=employee.fio,

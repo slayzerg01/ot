@@ -7,7 +7,7 @@ class Certificate(BaseModel):
     __tablename__ = 'certificates'
 
     number: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
-    employee_id: Mapped[int] = mapped_column(Integer, ForeignKey(Employee.id, ondelete='CASCADE'), nullable=True)
+    employee_id: Mapped[int] = mapped_column(Integer, ForeignKey(Employee.id), nullable=True) #, ondelete='CASCADE'
 
     employee = relationship("Employee", back_populates="certificate", passive_deletes=True)
 
@@ -32,7 +32,7 @@ class Exam(BaseModel):
     place: Mapped[str] = mapped_column(String(50), nullable=True)
     employee_id: Mapped[int] = mapped_column(
         Integer, 
-        ForeignKey(Employee.id), 
+        ForeignKey(Employee.id, ondelete='CASCADE'), 
         nullable= False)
     exam_type_id: Mapped[int] = mapped_column(
         Integer, 

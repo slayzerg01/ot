@@ -16,7 +16,7 @@ class Subdivision(BaseModel):
     __tablename__ = 'subdivisions'
 
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
-    division_id : Mapped[int] = mapped_column(Integer, ForeignKey(Division.id, ondelete='CASCADE'), nullable=False)
+    division_id : Mapped[int] = mapped_column(Integer, ForeignKey(Division.id), nullable=False) #, ondelete='CASCADE'
 
     employees = relationship("Employee", back_populates="subdivision", passive_deletes=True)
     division = relationship("Division", back_populates="subdivision", passive_deletes=True)
@@ -36,8 +36,8 @@ class Employee(BaseModel):
 
     FIO: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     is_active: Mapped[bool] = mapped_column(BOOLEAN, nullable=False)
-    position_id: Mapped[int] = mapped_column(Integer, ForeignKey(Position.id, ondelete='CASCADE'), nullable=False)
-    subdivision_id: Mapped[int] = mapped_column(Integer, ForeignKey(Subdivision.id, ondelete='CASCADE'), nullable=False)
+    position_id: Mapped[int] = mapped_column(Integer, ForeignKey(Position.id), nullable=False) #, ondelete='CASCADE'
+    subdivision_id: Mapped[int] = mapped_column(Integer, ForeignKey(Subdivision.id), nullable=False) #, ondelete='CASCADE'
 
     position = relationship("Position", back_populates="employees", passive_deletes=True)
     subdivision = relationship("Subdivision", back_populates="employees", passive_deletes=True)
