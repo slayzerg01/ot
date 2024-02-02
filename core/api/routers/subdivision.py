@@ -20,7 +20,6 @@ async def update_subdivisions(update_subdivisions: UpdateSubdivision,
 
 @router.delete("/del/{subdivision_id}")
 async def del_subdivision_by_id(subdivision_id: int, session: AsyncSession = Depends(get_async_session)):
-    print("del tipa", subdivision_id)
     await delete_subdivision_from_db(subdivision_id=subdivision_id, session=session)
     return {'details': 'succes'}
     

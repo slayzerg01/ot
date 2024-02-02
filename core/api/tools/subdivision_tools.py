@@ -5,6 +5,7 @@ from core.models.employee import Subdivision
 from sqlalchemy.engine import Result
 from core.api.schemas.subdivision import SubdivisionResponse, UpdateSubdivision, SubdivisionBase
 from sqlalchemy.ext.asyncio import AsyncSession
+import sys
  
 
 
@@ -39,22 +40,29 @@ async def add_subdivision(new_subdivision: Subdivision, division_id: int, sessio
     await session.refresh(subdivision)
 
 async def update_and_add_subdivisions_in_db(subdivisions: UpdateSubdivision, session: AsyncSession):
-    division_id = subdivisions.division_id
+    try:
+        division_id = subdivisions.division_id
 
-    for item in subdivisions.subdivisions.items():
-        subdivision: Subdivision = Subdivision(
-            name=item[1],
-            id=int(item[0]),
-            division_id=int(division_id)
-        )
-        if subdivision.id != 0:
-            await update_subdivision(subdivision, session)
-        else:
-            await add_subdivision(subdivision, division_id, session)
+        for item in subdivisions.subdivisions.items():
+            subdivision: Subdivision = Subdivision(
+                name=item[1],
+                id=int(item[0]),
+                division_id=int(division_id)
+            )
+            if subdivision.id != 0:
+                await update_subdivision(subdivision, session)
+            else:
+                await add_subdivision(subdivision, division_id, session)
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
 
 async def delete_subdivision_from_db(subdivision_id: int, session: AsyncSession):
-    print(subdivision_id)
-    stmt = delete(Subdivision).where(Subdivision.id == subdivision_id)
-    await session.execute(stmt)
-    await session.commit()
+    try:
+        stmt = delete(Subdivision).where(Subdivision.id == subdivision_id)
+        await session.execute(stmt)
+        await session.commit()
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
     

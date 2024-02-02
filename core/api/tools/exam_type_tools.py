@@ -5,6 +5,7 @@ from core.models.exam import ExamType
 from sqlalchemy.engine import Result
 from core.api.schemas.exam_types import ExamTypeResponse, ExamTypeUpdate, ExamTypeCreate
 from sqlalchemy.ext.asyncio import AsyncSession
+import sys
 
 
 async def get_all_exam_types_from_bd(session: AsyncSession) -> list[ExamTypeResponse]:
@@ -60,3 +61,12 @@ async def add_exam_type_in_bd(session: AsyncSession, new_exam_type: ExamTypeCrea
     await session.commit()
     await session.refresh(exam_type)
     return exam_type
+
+async def delete_exam_type_from_db(exam_type_id: int, session: AsyncSession):
+    try:
+        stmt = delete(ExamType).where(ExamType.id == exam_type_id)
+        await session.execute(stmt)
+        await session.commit()
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
