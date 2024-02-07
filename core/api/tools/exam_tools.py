@@ -5,6 +5,7 @@ from sqlalchemy.orm import joinedload
 from core.models.exam import Exam, ExamType
 from sqlalchemy.engine import Result
 from core.api.schemas.exams import ExamResponse, ExamCreate, ExamResponseWithEmployee, ExamCreated, ExamUpdate
+from dateutil.relativedelta import relativedelta
 import datetime
 import math
 
@@ -110,3 +111,16 @@ async def del_exam_in_db(session: AsyncSession, exam_id: int):
     await session.execute(stmt)
     await session.commit()
     return {'detail': 'success'}
+
+async def get_exams_for_next_month_from_db(session: AsyncSession):
+    today = datetime.date.today()
+    first_day = today.replace(day=1) + relativedelta(months=1)
+    last_day = first_day + relativedelta(months=1) - relativedelta(days=1)
+    print(first_day)
+    print(last_day)
+
+    stmt = select(Exam).where(and_(Exam.next_date <= last_day, Exam.next_date >= first_day))
+    res: Result = await session.execute(stmt)
+    exams: list[Exam] = res.scalars().all()
+    for exam in  exams:
+        print(exam)

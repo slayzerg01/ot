@@ -44,7 +44,7 @@ async def add_employee(new_employee: CreateEmployee, session: AsyncSession = Dep
         except IntegrityError as ex:
             raise HTTPException(status_code=400, detail=str(ex))
     
-@router.delete("/del/{employee_id}/", summary="delete employee")
+@router.delete("/del/{employee_id}", summary="delete employee")
 async def del_employee(employee: Employee = Depends(employee_by_id), session: AsyncSession = Depends(get_async_session)):
     await del_employee_from_db(employee, session)
     return [{"detail": f"{employee.fio} was deleted"}]

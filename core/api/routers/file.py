@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from openpyxl import load_workbook
 import io
 from core.api.schemas.subdivision import SubdivisionBase, SubdivisionResponse
@@ -8,10 +9,12 @@ from core.models.database import get_async_session
 from core.api.tools.position_tools import get_all_positions_from_db, add_position_in_db
 from core.api.tools.employee_tools import add_import_employee
 from core.api.tools.division_tools import get_all_divisions_from_db
+from core.api.tools.exam_tools import get_exams_for_next_month_from_db
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.tools.employee_tools import get_employee_from_db
 from core.api.schemas.position import CreatePosition
 from core.models.employee import Subdivision
+from core.CustomExceptions import CustomException
 import sys
 
 router = APIRouter(
@@ -19,10 +22,7 @@ router = APIRouter(
     tags=["file"]
 )
 
-class CustomException(Exception):
-    def __init__(self, text) -> None:
-        self.value = text
-        super().__init__(self.value)
+
 
 @router.post("/upload")
 async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_async_session)):
@@ -68,6 +68,12 @@ async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_asyn
     except:
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
+
+
+@router.get("/get-month-exam-list")
+async def download_file(session: AsyncSession = Depends(get_async_session)):
+  await get_exams_for_next_month_from_db(session=session)
+  #return FileResponse(path='static/img/login-bg.png', filename='login-bg.png', media_type='multipart/form-data')
     
 class EmployeeInfo:
     def __init__(self, fio: str, position: str, subdivision: str):

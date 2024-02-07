@@ -9,6 +9,7 @@ from core.api.schemas.exams import ExamResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.api.tools.exam_tools import get_all_exams_by_id
 from typing import Any
+from core.CustomExceptions import CustomException
 import datetime
 
 
@@ -139,6 +140,8 @@ async def add_employee_in_db(session: AsyncSession, new_employee: CreateEmployee
 
 
 async def del_employee_from_db(employee: Employee, session: AsyncSession):
+    stmt = update(Certificate).where(Certificate.employee_id == employee.id).values(employee_id = None)
+    await session.execute(stmt)
     stmt = delete(Employee).where(Employee.id == employee.id)
     await session.execute(stmt)
     await session.commit()
@@ -150,10 +153,16 @@ async def update_employee_in_db(session: AsyncSession, employee: Employee, emplo
             update_data['FIO'] = update_data.pop('fio')
         if employee_update.certificate_id is not None:
             update_data.pop('certificate_id')
-            stmt = update(Certificate).where(Certificate.employee_id == employee.id).values(employee_id = None)
-            await session.execute(stmt)
-            stmt = update(Certificate).where(Certificate.number == employee_update.certificate_id).values(employee_id = employee.id)
-            await session.execute(stmt)
+            stmt = select(Certificate).where(Certificate.number == employee_update.certificate_id)
+            certificate_res = await session.execute(stmt)
+            res = certificate_res.scalar_one_or_none() 
+            if res.employee_id:
+                raise CustomException('Номер удостоверения занят') 
+            else:
+                stmt = update(Certificate).where(Certificate.employee_id == employee.id).values(employee_id = None)
+                await session.execute(stmt)
+                stmt = update(Certificate).where(Certificate.number == employee_update.certificate_id).values(employee_id = employee.id)
+                await session.execute(stmt)
         id = employee.id
         stmt = update(Employee).where(Employee.id == employee.id).values(update_data)
         await session.execute(stmt)
