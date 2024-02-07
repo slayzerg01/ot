@@ -66,3 +66,12 @@ async def delete_subdivision_from_db(subdivision_id: int, session: AsyncSession)
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
     
+async def get_subdivision_by_id_from_db(subdivision_id: int, session: AsyncSession):
+    try:
+        stmt = select(Subdivision).options(joinedload(Subdivision.division)).where(Subdivision.id == subdivision_id)
+        res: Result = await session.execute(stmt)
+        return res.scalars().one_or_none()
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
+    

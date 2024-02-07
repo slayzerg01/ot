@@ -121,7 +121,7 @@ async def add_employee_in_db(session: AsyncSession, new_employee: CreateEmployee
     stmt = select(Certificate).where(Certificate.number == new_employee.certificate)
     res = await session.execute(stmt)
     certificate = res.scalar_one_or_none()
-    if certificate.employee_id:
+    if certificate:
         return {'code': 1,
                 'detail':'номер удостоверения уже используется, выберите другое значение'}
     else:

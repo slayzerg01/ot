@@ -3,9 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, update, delete
 from sqlalchemy.orm import joinedload
 from core.models.exam import Exam, ExamType
+from core.models.employee import Division
 from sqlalchemy.engine import Result
 from core.api.schemas.exams import ExamResponse, ExamCreate, ExamResponseWithEmployee, ExamCreated, ExamUpdate
 from dateutil.relativedelta import relativedelta
+from core.api.tools.division_tools import get_all_divisions_from_db
 import datetime
 import math
 
@@ -116,11 +118,14 @@ async def get_exams_for_next_month_from_db(session: AsyncSession):
     today = datetime.date.today()
     first_day = today.replace(day=1) + relativedelta(months=1)
     last_day = first_day + relativedelta(months=1) - relativedelta(days=1)
-    print(first_day)
-    print(last_day)
 
-    stmt = select(Exam).where(and_(Exam.next_date <= last_day, Exam.next_date >= first_day))
+    stmt = select(Exam).options(joinedload(Exam.exam_type), joinedload(Exam.employee)).where(and_(
+        Exam.next_date <= last_day, 
+        Exam.next_date >= first_day)
+        )
     res: Result = await session.execute(stmt)
     exams: list[Exam] = res.scalars().all()
-    for exam in  exams:
-        print(exam)
+    return exams
+    
+
+

@@ -11,3 +11,9 @@ class DivisionResponse(DivisionBase):
 
 class DivisionWithSubdivisions(DivisionResponse):
     subdivisions: list[SubdivisionBase]
+
+class DivisionCreate(DivisionBase):
+    pass
+
+class DivisionUpdate(DivisionBase):
+    pass

@@ -3,7 +3,7 @@ from sqlalchemy import and_, select, or_, delete, update
 from sqlalchemy.orm import joinedload
 from core.models.employee import Division, Subdivision
 from sqlalchemy.engine import Result
-from core.api.schemas.division import DivisionResponse, DivisionWithSubdivisions
+from core.api.schemas.division import DivisionResponse, DivisionWithSubdivisions, DivisionUpdate, DivisionCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -38,3 +38,27 @@ async def get_all_divisions_with_subdivision_from_db(session: AsyncSession) -> l
         )
         result.append(res)
     return result
+
+async def update_division_in_db(session: AsyncSession, division_id: int, division_update: DivisionUpdate):
+    try:
+        update_data = division_update.model_dump(exclude_unset=True)
+        stmt = update(Division).where(Division.id == division_id).values(update_data)
+        await session.execute(stmt)
+        await session.commit()
+        stmt = select(Division).where(Division.id == division_id)
+        res: Result = await session.execute(stmt)
+        division: Division = res.scalar_one_or_none()
+        return division
+    except Exception as ex:
+        raise HTTPException(status_code=400, detail=str(ex))
+    
+async def add_division_in_db(session: AsyncSession, new_division: DivisionCreate):
+    try:
+        division = Division()
+        division.name = new_division.name
+        session.add(division)
+        await session.commit()
+        await session.refresh(division)
+        return division
+    except Exception as ex:
+        raise HTTPException(status_code=400, detail=str(ex))

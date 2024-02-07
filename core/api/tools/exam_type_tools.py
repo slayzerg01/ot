@@ -53,14 +53,18 @@ async def update_exam_type_in_bd(session: AsyncSession, exam_type: ExamType, exa
         raise HTTPException(status_code=400, detail=str(ex))
 
 async def add_exam_type_in_bd(session: AsyncSession, new_exam_type: ExamTypeCreate):
-    exam_type = ExamType()
-    exam_type.name = new_exam_type.name
-    exam_type.period = new_exam_type.period
-    exam_type.description = new_exam_type.description
-    session.add(exam_type)
-    await session.commit()
-    await session.refresh(exam_type)
-    return exam_type
+    try:
+        exam_type = ExamType()
+        exam_type.name = new_exam_type.name
+        exam_type.period = new_exam_type.period
+        exam_type.description = new_exam_type.description
+        session.add(exam_type)
+        await session.commit()
+        await session.refresh(exam_type)
+        return exam_type
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
 
 async def delete_exam_type_from_db(exam_type_id: int, session: AsyncSession):
     try:
