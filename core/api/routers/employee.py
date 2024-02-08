@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.models.database import get_async_session
 from core.models.employee import Employee
@@ -13,8 +13,8 @@ router = APIRouter(
 )
 
 @router.get("/get_all_with_exams", summary="get all employees with exams")
-async def read_employees_with_exams(division: int = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchemWithExams]: 
-    return await get_all_employees_with_exams_from_db(session, skip, limit, division)
+async def read_employees_with_exams(division: int = None, query: str = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchemWithExams]: 
+    return await get_all_employees_with_exams_from_db(session=session, skip=skip, limit=limit, division=division, query=query)
 
 @router.get("/", summary="get all employees")
 async def read_employees(subdivision: str = None, skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)) -> list[EmployeeSchema]: 
@@ -62,3 +62,10 @@ async def update_employee(employee_update: EmployeeUpdate,
         employee = employee,
         employee_update = employee_update
     )
+
+
+@router.get("/search/", summary="update employee")
+async def update_employee(request: Request, 
+                          session: AsyncSession = Depends(get_async_session), 
+                          query: str | None = None):
+    emplo
