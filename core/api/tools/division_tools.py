@@ -5,6 +5,7 @@ from core.models.employee import Division, Subdivision
 from sqlalchemy.engine import Result
 from core.api.schemas.division import DivisionResponse, DivisionWithSubdivisions, DivisionUpdate, DivisionCreate
 from sqlalchemy.ext.asyncio import AsyncSession
+import sys
 
 
 async def get_all_divisions_from_db(session: AsyncSession) -> list[DivisionResponse]:
@@ -49,8 +50,9 @@ async def update_division_in_db(session: AsyncSession, division_id: int, divisio
         res: Result = await session.execute(stmt)
         division: Division = res.scalar_one_or_none()
         return division
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=str(ex))
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
     
 async def add_division_in_db(session: AsyncSession, new_division: DivisionCreate):
     try:
@@ -60,5 +62,16 @@ async def add_division_in_db(session: AsyncSession, new_division: DivisionCreate
         await session.commit()
         await session.refresh(division)
         return division
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=str(ex))
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))
+
+async def delete_division_from_db(division_id: int, session: AsyncSession):
+    try:
+        stmt = delete(Division).where(Division.id == division_id)
+        await session.execute(stmt)
+        await session.commit()
+        return {"detail": "succes"}
+    except:
+        type, value, traceback = sys.exc_info()
+        raise HTTPException(status_code=400, detail=str(value))

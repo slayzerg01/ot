@@ -71,6 +71,7 @@ async def delete_exam_type_from_db(exam_type_id: int, session: AsyncSession):
         stmt = delete(ExamType).where(ExamType.id == exam_type_id)
         await session.execute(stmt)
         await session.commit()
+        return {"detail": "succes"}
     except:
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
