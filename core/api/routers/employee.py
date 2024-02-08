@@ -62,10 +62,3 @@ async def update_employee(employee_update: EmployeeUpdate,
         employee = employee,
         employee_update = employee_update
     )
-
-
-@router.get("/search/", summary="update employee")
-async def update_employee(request: Request, 
-                          session: AsyncSession = Depends(get_async_session), 
-                          query: str | None = None):
-    emplo
