@@ -29,11 +29,8 @@ from core.api.tools.exam_tools import get_all_exams_from_db, get_max_pages
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
-from fastapi_users.authentication import CookieTransport, AuthenticationBackend, JWTStrategy
-from core.models.User import User, get_user_manager
-from fastapi_users import FastAPIUsers
-from core.config import SECRET
-import uuid
+from core.models.User import User
+from core.UserManager import auth_backend, fastapi_users, current_user, current_active_verified_user
 
 
 app = FastAPI()
@@ -49,28 +46,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-cookie_transport = CookieTransport(
-    cookie_max_age=3600*8,
-    cookie_name='ot_auth_token',
-    )
-
-def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret=SECRET, lifetime_seconds=3600*8)
-
-auth_backend = AuthenticationBackend(
-    name="jwt",
-    transport=cookie_transport,
-    get_strategy=get_jwt_strategy,
-)
-
-fastapi_users = FastAPIUsers[User, uuid.UUID](
-    get_user_manager,
-    [auth_backend],
-)
-
-current_user = fastapi_users.current_user(optional=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
 
 
 folder = os.path.dirname(__file__)
@@ -118,7 +93,7 @@ async def root(
     division: str | None = None, 
     user: User | None = Depends(current_user),
     session: AsyncSession = Depends(get_async_session)
-):  
+    ):  
     if user is not None:
         employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_db_v2(session=session, skip=0, limit=10, subdivision=division)
         positions: list[PositionRespone] = await get_all_positions_from_db(session=session)
@@ -198,7 +173,9 @@ files = {
 
 
 @app.get("/get_video/{video_name}")
-async def video_endpoint(video_name: str, range: str = Header(None)):
+async def video_endpoint(video_name: str, 
+                         range: str = Header(None),
+                         user: User = Depends(current_active_verified_user)):
     CHUNK_SIZE = 1024*1024
     video_path = Path(files.get(video_name))
     start, end = range.replace("bytes=", "").split("-")
@@ -215,7 +192,10 @@ async def video_endpoint(video_name: str, range: str = Header(None)):
         return Response(data, status_code=206, headers=headers, media_type="video/mp4")
 
 @app.get('/play_video/{video_name}')
-async def play_video(video_name: str, request: Request, response_class=HTMLResponse):
+async def play_video(video_name: str, 
+                     request: Request, 
+                     response_class=HTMLResponse,
+                     user: User = Depends(current_active_verified_user)):
     video_path = files.get(video_name)
     if video_path:
         return templates.TemplateResponse(

@@ -17,6 +17,8 @@ from core.api.schemas.position import CreatePosition
 from core.models.employee import Division, Subdivision, Employee
 from core.CustomExceptions import CustomException
 from dateutil.relativedelta import relativedelta
+from core.models.User import User
+from core.UserManager import current_active_verified_user
 import sys
 import io
 
@@ -30,7 +32,9 @@ router = APIRouter(
 
 
 @router.post("/upload")
-async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_async_session)):
+async def upload_file(file: UploadFile, 
+                      user: User = Depends(current_active_verified_user),
+                      session: AsyncSession = Depends(get_async_session)):
     try:
         contents = file.file.read()
         filename=io.BytesIO(contents)
@@ -76,7 +80,8 @@ async def upload_file(file: UploadFile, session: AsyncSession = Depends(get_asyn
 
 
 @router.get("/get-month-exam-list")
-async def download_file(session: AsyncSession = Depends(get_async_session)):
+async def download_file(user: User = Depends(current_active_verified_user),
+                        session: AsyncSession = Depends(get_async_session)):
     try:
         exams: list[Exam] = await get_exams_for_next_month_from_db(session=session)
         divisions: list[Division] = await get_all_divisions_from_db(session=session)
