@@ -3,7 +3,12 @@ from sqlalchemy import and_, select, or_, delete, update
 from sqlalchemy.orm import joinedload
 from core.models.employee import Division, Subdivision
 from sqlalchemy.engine import Result
-from core.api.schemas.division import DivisionResponse, DivisionWithSubdivisions, DivisionUpdate, DivisionCreate
+from core.api.schemas.division import (
+    DivisionResponse,
+    DivisionWithSubdivisions,
+    DivisionUpdate,
+    DivisionCreate,
+)
 from sqlalchemy.ext.asyncio import AsyncSession
 import sys
 
@@ -14,7 +19,7 @@ async def get_all_divisions_from_db(session: AsyncSession) -> list[DivisionRespo
     divisions: list[Division] = res.scalars().all()
     result = []
     for item in divisions:
-        division : Division = item
+        division: Division = item
         res: DivisionResponse = DivisionResponse(
             name=division.name,
             id=division.id,
@@ -22,25 +27,33 @@ async def get_all_divisions_from_db(session: AsyncSession) -> list[DivisionRespo
         result.append(res)
     return result
 
-async def get_all_divisions_with_subdivision_from_db(session: AsyncSession) -> list[DivisionWithSubdivisions]:
+
+async def get_all_divisions_with_subdivision_from_db(
+    session: AsyncSession,
+) -> list[DivisionWithSubdivisions]:
     stmt = select(Division).order_by(Division.name)
     res: Result = await session.execute(stmt)
     divisions: list[Division] = res.scalars().all()
     result = []
     for item in divisions:
-        division : Division = item
-        stmt = select(Subdivision).order_by(Subdivision.name).where(Subdivision.division_id == division.id)
+        division: Division = item
+        stmt = (
+            select(Subdivision)
+            .order_by(Subdivision.name)
+            .where(Subdivision.division_id == division.id)
+        )
         res: Result = await session.execute(stmt)
         subdivisions: list[Subdivision] = res.scalars().all()
         res: DivisionWithSubdivisions = DivisionWithSubdivisions(
-            name=division.name,
-            id=division.id,
-            subdivisions=subdivisions
+            name=division.name, id=division.id, subdivisions=subdivisions
         )
         result.append(res)
     return result
 
-async def update_division_in_db(session: AsyncSession, division_id: int, division_update: DivisionUpdate):
+
+async def update_division_in_db(
+    session: AsyncSession, division_id: int, division_update: DivisionUpdate
+):
     try:
         update_data = division_update.model_dump(exclude_unset=True)
         stmt = update(Division).where(Division.id == division_id).values(update_data)
@@ -53,7 +66,8 @@ async def update_division_in_db(session: AsyncSession, division_id: int, divisio
     except:
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
-    
+
+
 async def add_division_in_db(session: AsyncSession, new_division: DivisionCreate):
     try:
         division = Division()
@@ -65,6 +79,7 @@ async def add_division_in_db(session: AsyncSession, new_division: DivisionCreate
     except:
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
+
 
 async def delete_division_from_db(division_id: int, session: AsyncSession):
     try:

@@ -9,13 +9,12 @@ from typing import Optional
 import uuid
 
 
-
 class User(SQLAlchemyBaseUserTableUUID, Base):
     pass
 
+
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
     yield SQLAlchemyUserDatabase(session, User)
-
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
@@ -29,7 +28,7 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         self, user: User, token: str, request: Optional[Request] = None
     ):
         print(f"User {user.id} has forgot their password. Reset token: {token}")
-    
+
     async def on_after_login(
         self,
         user: User,
@@ -43,7 +42,6 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     ):
         print(f"Verification requested for user {user.id}. Verification token: {token}")
 
+
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
-
-

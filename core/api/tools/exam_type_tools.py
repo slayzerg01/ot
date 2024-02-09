@@ -14,15 +14,16 @@ async def get_all_exam_types_from_bd(session: AsyncSession) -> list[ExamTypeResp
     exam_types: list[ExamType] = res.scalars().all()
     result = []
     for item in exam_types:
-        exam_type : ExamType = item
-        res: ExamTypeResponse= ExamTypeResponse(
+        exam_type: ExamType = item
+        res: ExamTypeResponse = ExamTypeResponse(
             name=exam_type.name,
             id=exam_type.id,
             description=exam_type.description,
-            period=exam_type.period
+            period=exam_type.period,
         )
         result.append(res)
     return result
+
 
 async def get_exam_type_from_bd(session: AsyncSession, id: int) -> ExamTypeResponse:
     stmt = select(ExamType).where(ExamType.id == id)
@@ -33,13 +34,16 @@ async def get_exam_type_from_bd(session: AsyncSession, id: int) -> ExamTypeRespo
             name=exam_type.name,
             id=exam_type.id,
             period=exam_type.period,
-            description=exam_type.description
+            description=exam_type.description,
         )
         return res
     else:
         return None
 
-async def update_exam_type_in_bd(session: AsyncSession, exam_type: ExamType, exam_type_update: ExamTypeUpdate):
+
+async def update_exam_type_in_bd(
+    session: AsyncSession, exam_type: ExamType, exam_type_update: ExamTypeUpdate
+):
     try:
         update_data = exam_type_update.model_dump(exclude_unset=True)
         stmt = update(ExamType).where(ExamType.id == exam_type.id).values(update_data)
@@ -51,6 +55,7 @@ async def update_exam_type_in_bd(session: AsyncSession, exam_type: ExamType, exa
         return exam_type
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex))
+
 
 async def add_exam_type_in_bd(session: AsyncSession, new_exam_type: ExamTypeCreate):
     try:
@@ -65,6 +70,7 @@ async def add_exam_type_in_bd(session: AsyncSession, new_exam_type: ExamTypeCrea
     except:
         type, value, traceback = sys.exc_info()
         raise HTTPException(status_code=400, detail=str(value))
+
 
 async def delete_exam_type_from_db(exam_type_id: int, session: AsyncSession):
     try:

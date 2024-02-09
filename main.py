@@ -1,6 +1,11 @@
 from pathlib import Path
 from fastapi import FastAPI, Depends, Header, Request, HTTPException, Response, status
-from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse, StreamingResponse
+from fastapi.responses import (
+    FileResponse,
+    HTMLResponse,
+    RedirectResponse,
+    StreamingResponse,
+)
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 import os
@@ -30,14 +35,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from core.api.schemas.User import UserCreate, UserRead, UserUpdate
 from core.models.User import User
-from core.UserManager import auth_backend, fastapi_users, current_user, current_active_verified_user
+from core.UserManager import (
+    auth_backend,
+    fastapi_users,
+    current_user,
+    current_active_verified_user,
+)
 
 
 app = FastAPI()
 
-origins = [
-    "*"
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -49,8 +57,12 @@ app.add_middleware(
 
 
 folder = os.path.dirname(__file__)
-app.mount("/static", StaticFiles(directory=folder+"/static/external/OT", html=True), name="static")
-templates = Jinja2Templates(directory=folder+"/static/external/OT")
+app.mount(
+    "/static",
+    StaticFiles(directory=folder + "/static/external/OT", html=True),
+    name="static",
+)
+templates = Jinja2Templates(directory=folder + "/static/external/OT")
 
 app.include_router(employee.router)
 app.include_router(exam_types.router)
@@ -89,94 +101,125 @@ app.include_router(
 
 @app.get("/")
 async def root(
-    request: Request, 
-    division: str | None = None, 
+    request: Request,
+    division: str | None = None,
     user: User | None = Depends(current_user),
-    session: AsyncSession = Depends(get_async_session)
-    ):  
+    session: AsyncSession = Depends(get_async_session),
+):
     if user is not None:
-        employees: list[EmployeeSchema_v2] = await employee.get_all_employees_from_db_v2(session=session, skip=0, limit=10, subdivision=division)
-        positions: list[PositionRespone] = await get_all_positions_from_db(session=session)
-        examTypes: list[ExamTypeResponse] = await get_all_exam_types_from_bd(session=session)
-        subdivisons: list[SubdivisionResponse] = await get_all_subdivisions_from_db(session=session)
-        return templates.TemplateResponse("index.html",
-                                            {"request": request,
-                                            "employees": employees,
-                                            "positions": positions,
-                                            "examTypes": examTypes,
-                                            "subdivisons": subdivisons})
+        employees: list[
+            EmployeeSchema_v2
+        ] = await employee.get_all_employees_from_db_v2(
+            session=session, skip=0, limit=10, subdivision=division
+        )
+        positions: list[PositionRespone] = await get_all_positions_from_db(
+            session=session
+        )
+        examTypes: list[ExamTypeResponse] = await get_all_exam_types_from_bd(
+            session=session
+        )
+        subdivisons: list[SubdivisionResponse] = await get_all_subdivisions_from_db(
+            session=session
+        )
+        return templates.TemplateResponse(
+            "index.html",
+            {
+                "request": request,
+                "employees": employees,
+                "positions": positions,
+                "examTypes": examTypes,
+                "subdivisons": subdivisons,
+            },
+        )
     else:
         return RedirectResponse(url="/login")
 
 
 @app.get("/login")
 async def get_login_page(request: Request):
-    return templates.TemplateResponse("login.html",
-                                      {"request": request})
+    return templates.TemplateResponse("login.html", {"request": request})
+
 
 @app.get("/certificates")
-async def get_certificate_page(request: Request, 
-               user: User = Depends(current_active_verified_user),
-               assigned: bool | None = None,
-               session: AsyncSession = Depends(get_async_session)):
+async def get_certificate_page(
+    request: Request,
+    user: User = Depends(current_active_verified_user),
+    assigned: bool | None = None,
+    session: AsyncSession = Depends(get_async_session),
+):
     certificates = await get_all_certificates(session=session, assigned=assigned)
-    return templates.TemplateResponse("certificates.html",
-                                      {"request": request,
-                                       "certificates": certificates,
-                                       "assigned": assigned})
+    return templates.TemplateResponse(
+        "certificates.html",
+        {"request": request, "certificates": certificates, "assigned": assigned},
+    )
+
 
 @app.get("/exam-types")
-async def get_exam_types_page(request: Request, 
-               user: User = Depends(current_active_verified_user),
-               session: AsyncSession = Depends(get_async_session)):
+async def get_exam_types_page(
+    request: Request,
+    user: User = Depends(current_active_verified_user),
+    session: AsyncSession = Depends(get_async_session),
+):
     exam_types = await get_all_exam_types_from_bd(session)
-    return templates.TemplateResponse("exam-types.html",
-                                      {"request": request,
-                                       "exam_types": exam_types})
+    return templates.TemplateResponse(
+        "exam-types.html", {"request": request, "exam_types": exam_types}
+    )
+
 
 @app.get("/positions")
-async def get_positions_page(request: Request, 
-               user: User = Depends(current_active_verified_user),
-               session: AsyncSession = Depends(get_async_session)):
+async def get_positions_page(
+    request: Request,
+    user: User = Depends(current_active_verified_user),
+    session: AsyncSession = Depends(get_async_session),
+):
     positions = await get_all_positions_from_db(session)
-    return templates.TemplateResponse("positions.html",
-                                      {"request": request,
-                                       "positions": positions})
+    return templates.TemplateResponse(
+        "positions.html", {"request": request, "positions": positions}
+    )
+
 
 @app.get("/divisions-page")
-async def get_positions_page(request: Request, 
-               user: User = Depends(current_active_verified_user),
-               session: AsyncSession = Depends(get_async_session)):
+async def get_positions_page(
+    request: Request,
+    user: User = Depends(current_active_verified_user),
+    session: AsyncSession = Depends(get_async_session),
+):
     divisions = await get_all_divisions_with_subdivision_from_db(session)
-    return templates.TemplateResponse("divisions.html",
-                                      {"request": request,
-                                       "divisions": divisions})
+    return templates.TemplateResponse(
+        "divisions.html", {"request": request, "divisions": divisions}
+    )
+
 
 @app.get("/exams-list")
-async def get_positions_page(request: Request, 
-                             page: int = 1,
-                             user: User = Depends(current_active_verified_user),
-                             session: AsyncSession = Depends(get_async_session)):
+async def get_positions_page(
+    request: Request,
+    page: int = 1,
+    user: User = Depends(current_active_verified_user),
+    session: AsyncSession = Depends(get_async_session),
+):
     tmp = 20
-    exams = await get_all_exams_from_db(skip=page*tmp-tmp, limit=tmp, session=session)
+    exams = await get_all_exams_from_db(
+        skip=page * tmp - tmp, limit=tmp, session=session
+    )
     max_page = await get_max_pages(skip=tmp, session=session)
-    return templates.TemplateResponse("exam-list.html",
-                                      {"request": request,
-                                       "exams": exams,
-                                       "page": page,
-                                       "max_page": max_page})
+    return templates.TemplateResponse(
+        "exam-list.html",
+        {"request": request, "exams": exams, "page": page, "max_page": max_page},
+    )
+
 
 files = {
-    item: os.path.join('static/video', item)
-    for item in os.listdir('static/video')
+    item: os.path.join("static/video", item) for item in os.listdir("static/video")
 }
 
 
 @app.get("/get_video/{video_name}")
-async def video_endpoint(video_name: str, 
-                         range: str = Header(None),
-                         user: User = Depends(current_active_verified_user)):
-    CHUNK_SIZE = 1024*1024
+async def video_endpoint(
+    video_name: str,
+    range: str = Header(None),
+    user: User = Depends(current_active_verified_user),
+):
+    CHUNK_SIZE = 1024 * 1024
     video_path = Path(files.get(video_name))
     start, end = range.replace("bytes=", "").split("-")
     start = int(start)
@@ -186,22 +229,28 @@ async def video_endpoint(video_name: str,
         data = video.read(end - start)
         filesize = str(video_path.stat().st_size)
         headers = {
-            'Content-Range': f'bytes {str(start)}-{str(end)}/{filesize}',
-            'Accept-Ranges': 'bytes'
+            "Content-Range": f"bytes {str(start)}-{str(end)}/{filesize}",
+            "Accept-Ranges": "bytes",
         }
         return Response(data, status_code=206, headers=headers, media_type="video/mp4")
 
-@app.get('/play_video/{video_name}')
-async def play_video(video_name: str, 
-                     request: Request, 
-                     response_class=HTMLResponse,
-                     user: User = Depends(current_active_verified_user)):
+
+@app.get("/play_video/{video_name}")
+async def play_video(
+    video_name: str,
+    request: Request,
+    response_class=HTMLResponse,
+    user: User = Depends(current_active_verified_user),
+):
     video_path = files.get(video_name)
     if video_path:
         return templates.TemplateResponse(
-            'video.html', {'request': request, 'video': {'path': video_path, 'name': video_name}})
+            "video.html",
+            {"request": request, "video": {"path": video_path, "name": video_name}},
+        )
     else:
         return Response(status_code=404)
+
 
 # @app.exception_handler(HTTPException)
 # async def http_exception(request: Request, exc: HTTPException):

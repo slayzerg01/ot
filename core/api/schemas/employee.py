@@ -8,11 +8,12 @@ class EmployeeBase(BaseModel):
     subdivision_id: int
     model_config = ConfigDict(from_attributes=True)
 
+
 class EmployeeSchema(EmployeeBase):
     id: int
     position: str
     subdivision: str
-   
+
 
 class EmployeeSchema_v2(EmployeeBase):
     id: int
@@ -21,8 +22,10 @@ class EmployeeSchema_v2(EmployeeBase):
     division: str
     certificate: int | None
 
+
 class EmployeeSchemWithExams(EmployeeSchema_v2):
     exams: list[ExamResponse]
+
 
 class EmployeeUpdate(EmployeeBase):
     fio: str | None = None
@@ -30,6 +33,7 @@ class EmployeeUpdate(EmployeeBase):
     subdivision_id: int | None = None
     is_active: bool | None = None
     certificate_id: int | None = None
+
 
 class CreateEmployee(EmployeeBase):
     certificate: int | None = None

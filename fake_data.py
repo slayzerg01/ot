@@ -8,14 +8,16 @@ from faker.providers import DynamicProvider
 from datetime import timedelta
 import random
 
-engine = create_engine(f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+engine = create_engine(
+    f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
 session = Session(bind=engine)
 
-fake = Faker(['ru_RU'])
+fake = Faker(["ru_RU"])
 
 exam_place_provider = DynamicProvider(
-     provider_name="place",
-     elements=["ИВЦ", "ФКЦ"],
+    provider_name="place",
+    elements=["ИВЦ", "ФКЦ"],
 )
 fake.add_provider(exam_place_provider)
 
@@ -25,8 +27,8 @@ for i in range(100):
     exam.date = fake.date_between()
     exam.next_date = exam.date + timedelta(days=365)
     exam.protocol = fake.passport_number()
-    exam.employee_id = random.randint(14,65)
-    exam.exam_type_id = random.randint(1,9)
+    exam.employee_id = random.randint(14, 65)
+    exam.exam_type_id = random.randint(1, 9)
     exam.notation = fake.text()
     exam.place = fake.place()
     session.add(exam)

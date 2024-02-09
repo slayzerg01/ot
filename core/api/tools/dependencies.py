@@ -9,19 +9,31 @@ from core.api.tools.employee_tools import get_employee_from_db
 from core.api.tools.exam_type_tools import get_exam_type_from_bd
 from core.api.tools.position_tools import get_position_by_id_from_db
 
-async def employee_by_id(employee_id: Annotated[int, Path], session: AsyncSession = Depends(get_async_session)) -> Employee:
+
+async def employee_by_id(
+    employee_id: Annotated[int, Path],
+    session: AsyncSession = Depends(get_async_session),
+) -> Employee:
     employee = await get_employee_from_db(session, None, employee_id)
     if employee is not None:
         return employee
     raise HTTPException(status_code=404, detail="Employee not found")
 
-async def exam_type_by_id(exam_type_id: Annotated[int, Path], session: AsyncSession = Depends(get_async_session)) -> ExamType:
+
+async def exam_type_by_id(
+    exam_type_id: Annotated[int, Path],
+    session: AsyncSession = Depends(get_async_session),
+) -> ExamType:
     exam_type = await get_exam_type_from_bd(session, exam_type_id)
     if exam_type is not None:
         return exam_type
     raise HTTPException(status_code=404, detail="Exam_type not found")
 
-async def position_by_id(position_id: Annotated[int, Path], session: AsyncSession = Depends(get_async_session)) -> Position:
+
+async def position_by_id(
+    position_id: Annotated[int, Path],
+    session: AsyncSession = Depends(get_async_session),
+) -> Position:
     position = await get_position_by_id_from_db(session, position_id)
     if position is not None:
         return position
