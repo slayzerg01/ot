@@ -13,13 +13,22 @@ import sys
 
 
 async def get_all_subdivisions_from_db(
+    division_id: int | None,
     session: AsyncSession,
 ) -> list[SubdivisionResponse]:
-    stmt = (
-        select(Subdivision)
-        .order_by(Subdivision.name)
-        .options(joinedload(Subdivision.division))
-    )
+    if division_id:
+        stmt = (
+            select(Subdivision)
+            .order_by(Subdivision.name)
+            .options(joinedload(Subdivision.division))
+            .where(Subdivision.division_id == division_id)
+        )
+    else:
+        stmt = (
+            select(Subdivision)
+            .order_by(Subdivision.name)
+            .options(joinedload(Subdivision.division))
+        )
     res: Result = await session.execute(stmt)
     subdivisions: list[Subdivision] = res.scalars().all()
     result = []

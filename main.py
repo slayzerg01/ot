@@ -119,7 +119,8 @@ async def root(
             session=session
         )
         subdivisons: list[SubdivisionResponse] = await get_all_subdivisions_from_db(
-            session=session
+            session=session,
+            division_id=None
         )
         return templates.TemplateResponse(
             "index.html",

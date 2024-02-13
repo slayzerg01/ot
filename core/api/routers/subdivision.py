@@ -19,10 +19,11 @@ router = APIRouter(prefix="/subdivisions", tags=["subdivisions"])
 
 @router.get("/", summary="get all subdivisions")
 async def get_subdivisions(
+    division_id: int | None = None,
     user: User = Depends(current_active_verified_user),
     session: AsyncSession = Depends(get_async_session),
 ) -> list[SubdivisionResponse]:
-    return await get_all_subdivisions_from_db(session)
+    return await get_all_subdivisions_from_db(session=session, division_id=division_id)
 
 
 @router.patch("/update_subdivisions")

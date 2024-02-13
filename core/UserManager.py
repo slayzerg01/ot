@@ -9,13 +9,13 @@ from core.config import SECRET
 import uuid
 
 cookie_transport = CookieTransport(
-    cookie_max_age=3600 * 8,
+    cookie_max_age=3600 * 4,
     cookie_name="ot_auth_token",
 )
 
 
 def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret=SECRET, lifetime_seconds=3600 * 8)
+    return JWTStrategy(secret=SECRET, lifetime_seconds=3600 * 4)
 
 
 auth_backend = AuthenticationBackend(
